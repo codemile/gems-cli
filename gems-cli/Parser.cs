@@ -6,8 +6,11 @@ using GemsCLI.Exceptions;
 namespace GemsCLI
 {
     /// <summary>
-    /// Handles converting command line arguments into a collection that
-    /// can be used.
+    /// Converts a collection of strings into a collection
+    /// of parameter values.
+    /// 
+    /// A collection of parameter descriptions is used to
+    /// perform data validation on the input strings.
     /// </summary>
     public class Parser
     {
@@ -29,19 +32,22 @@ namespace GemsCLI
         /// <summary>
         /// Reads the command line parameters.
         /// </summary>
-        private static List<ArgumentValue> Read(IEnumerable<string> pArgs)
+        private static List<ArgumentValue> CreateValues(ParserOptions pOptions, IEnumerable<string> pArgs)
         {
-            return (from arg in pArgs select new ArgumentValue(arg)).ToList();
+            return (from arg in pArgs select new ArgumentValue(pOptions.Prefix, pOptions.EqualChar, arg)).ToList();
         }
 
         /// <summary>
-        /// Constructor
+        /// Initializes a new instance of GemsCLI.Parser
         /// </summary>
+        /// <param name="pOptions">The options for parsing.</param>
+        /// <param name="pArgumentList">List of argument descriptions.</param>
+        /// <param name="pArgs">Parameter strings from the command line.</param>
         public Parser(ParserOptions pOptions, ArgumentList pArgumentList, IEnumerable<string> pArgs)
         {
             _options = pOptions;
             _argumentList = pArgumentList;
-            _values = Read(pArgs);
+            _values = CreateValues(pOptions, pArgs);
         }
 
         /// <summary>

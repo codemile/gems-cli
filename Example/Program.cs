@@ -24,7 +24,7 @@ namespace Example
              * Uses a resource file to define the help messages. Alternatively
              * use the Arguments class and manually provide help messages.
              */
-            HelpResource help = new HelpResource(Help.ResourceManager, new ArgumentList());
+            HelpResource help = new HelpResource(Help.ResourceManager, new ArgumentList(), false);
 
             /**
              * How to define an IP address.

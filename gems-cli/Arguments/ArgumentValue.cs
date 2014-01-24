@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using GemsCLI.Exceptions;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GemsCLI.Arguments
 {
@@ -9,35 +9,73 @@ namespace GemsCLI.Arguments
     internal class ArgumentValue : IEqualityComparer<ArgumentValue>
     {
         /// <summary>
-        /// The name of the argument.
+        /// The name of the argument, or Null.
         /// </summary>
         public readonly string Name;
 
         /// <summary>
-        /// The value of the argument.
+        /// The value of the argument, or Null
         /// </summary>
         public readonly string Value;
 
         /// <summary>
-        /// Constructor
+        /// Does this argument have a value
         /// </summary>
-        public ArgumentValue(string pArg)
+        public bool HasValue
         {
-            if (!pArg.StartsWith("--"))
-            {
-                throw new ArgumentParserException("Unsupported or invalid argument: {0}", pArg);
-            }
+            get { return Value != null; }
+        }
 
-            int first = pArg.IndexOf('=');
-            if (first == -1)
+        /// <summary>
+        /// Is this a named argument
+        /// </summary>
+        public bool isNamed
+        {
+            get { return Name != null; }
+        }
+
+        /// <summary>
+        /// Extracts the name part of the argument.
+        /// </summary>
+        /// <param name="pPrefix">The prefix to identify a named parameter</param>
+        /// <param name="pEquals">The character to split between name and value.</param>
+        /// <param name="pArg">The argument value.</param>
+        /// <returns>The name part or Null if no name.</returns>
+        private static string ExtractName(string pPrefix, string pEquals, string pArg)
+        {
+            if (!pArg.StartsWith(pPrefix))
             {
-                Name = pArg.Substring(2).ToLower();
+                return null;
             }
-            else
+            string str = pArg.Substring(pPrefix.Length);
+            int equal = str.IndexOf(pEquals, StringComparison.Ordinal);
+            return equal == -1 ? str.ToLower() : str.Substring(0, equal).ToLower();
+        }
+
+        /// <summary>
+        /// Extracts the value part of the argument.
+        /// </summary>
+        /// <param name="pPrefix">The prefix to identify a named parameter</param>
+        /// <param name="pEquals">The character to split between name and value.</param>
+        /// <param name="pArg">The argument value.</param>
+        /// <returns>The value part of Null if no value</returns>
+        private static string ExtractValue(string pPrefix, string pEquals, string pArg)
+        {
+            if (!pArg.StartsWith(pPrefix))
             {
-                Name = pArg.Substring(2, first - 2).ToLower();
-                Value = pArg.Substring(first + 1).Trim();
+                return pArg;
             }
+            int equal = pArg.IndexOf(pEquals, StringComparison.Ordinal);
+            return equal == -1 ? null : pArg.Substring(equal + pEquals.Length);
+        }
+
+        /// <summary>
+        /// Initializes an instance of this class.
+        /// </summary>
+        public ArgumentValue(string pPrefix, string pEquals, string pArg)
+        {
+            Name = ExtractName(pPrefix, pEquals, pArg);
+            Value = ExtractValue(pPrefix, pEquals, pArg);
         }
 
         /// <summary>
@@ -57,8 +95,8 @@ namespace GemsCLI.Arguments
                 return false;
             }
 
-            //Check whether the products' properties are equal. 
-            return pArg1.Name == pArg2.Name;
+            //Check whether the properties are equal. 
+            return pArg1.Name.Equals(pArg2.Name) && pArg1.Value == pArg2.Value;
         }
 
         /// <summary>
@@ -66,7 +104,13 @@ namespace GemsCLI.Arguments
         /// </summary>
         public int GetHashCode(ArgumentValue pObj)
         {
-            return ReferenceEquals(pObj, null) ? 0 : Name.GetHashCode();
+            if (ReferenceEquals(pObj, null))
+            {
+                return 0;
+            }
+            int name = (Name == null) ? 0 : Name.GetHashCode();
+            int value = (Value == null) ? 0 : Value.GetHashCode();
+            return name ^ value;
         }
     }
 }

@@ -19,6 +19,11 @@ namespace GemsCLI
         private readonly ResourceManager _resource;
 
         /// <summary>
+        /// What to do if help is missing.
+        /// </summary>
+        private readonly bool _strict;
+
+        /// <summary>
         /// Finds the help message for a parameter
         /// </summary>
         /// <param name="pName">The parameter name</param>
@@ -26,11 +31,11 @@ namespace GemsCLI
         private string getHelp(string pName)
         {
             string help = _resource.GetString(pName);
-            if (help == null)
+            if (help == null && _strict)
             {
                 throw new ArgumentParserException("Help not defined for {0}", pName);
             }
-            return help;
+            return help ?? "";
         }
 
         /// <summary>
@@ -38,10 +43,12 @@ namespace GemsCLI
         /// </summary>
         /// <param name="pResource">The manager with help messages.</param>
         /// <param name="pArgumentList">The arguments collection.</param>
-        public HelpResource(ResourceManager pResource, ArgumentList pArgumentList)
+        /// <param name="pStrict">Controls the throwing of an exception for missing help.</param>
+        public HelpResource(ResourceManager pResource, ArgumentList pArgumentList, bool pStrict = true)
         {
             _resource = pResource;
             ArgumentList = pArgumentList;
+            _strict = pStrict;
         }
 
         /// <summary>
