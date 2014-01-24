@@ -39,12 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arguments\Argument.cs" />
-    <Compile Include="Arguments\Parser.cs" />
+    <Compile Include="Help.cs" />
+    <Compile Include="HelpResource.cs" />
+    <Compile Include="Enums\eORDINAL.cs" />
+    <Compile Include="Enums\eSCOPE.cs" />
+    <Compile Include="Arguments\Description.cs" />
     <Compile Include="Arguments\ArgumentValue.cs" />
+    <Compile Include="Arguments\ArgumentList.cs" />
     <Compile Include="Exceptions\ArgumentParserException.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="ParserOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\iParamType.cs" />
+    <Compile Include="Types\ParamInt.cs" />
+    <Compile Include="Types\ParamIP.cs" />
+    <Compile Include="Types\ParamString.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

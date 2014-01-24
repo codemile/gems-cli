@@ -1,97 +1,72 @@
-﻿using GemsCLI.Exceptions;
+﻿using System.Collections.Generic;
+using GemsCLI.Exceptions;
 
 namespace GemsCLI.Arguments
 {
     /// <summary>
     /// Holds the value of a single command line argument.
     /// </summary>
-    public class ArgumentValue
+    internal class ArgumentValue : IEqualityComparer<ArgumentValue>
     {
-        /// <summary>
-        /// The help message for the argument.
-        /// </summary>
-        public readonly string Help;
-
         /// <summary>
         /// The name of the argument.
         /// </summary>
         public readonly string Name;
 
         /// <summary>
-        /// Does the argument require a value
-        /// </summary>
-        public readonly bool NeedsValue;
-
-        /// <summary>
-        /// If this argument required.
-        /// </summary>
-        public readonly bool Required;
-
-        /// <summary>
         /// The value of the argument.
         /// </summary>
-        private string _value;
-
-        /// <summary>
-        /// Is the argument set on the command line.
-        /// </summary>
-        public bool Enabled { get; private set; }
+        public readonly string Value;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ArgumentValue(string pName, bool pNeedsValue, bool pRequired, string pHelp, string pValue)
+        public ArgumentValue(string pArg)
         {
-            Name = pName;
-            NeedsValue = pNeedsValue;
-            Required = pRequired;
-            Help = pHelp;
-            Enabled = false;
-            _value = pValue;
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        public override string ToString()
-        {
-            return string.IsNullOrWhiteSpace(_value) ? "" : _value;
-        }
-
-        /// <summary>
-        /// Sets the value for an argument.
-        /// </summary>
-        public void Set(string pValue)
-        {
-            Enabled = true;
-            _value = pValue;
-            if (!NeedsValue && !string.IsNullOrWhiteSpace(pValue))
+            if (!pArg.StartsWith("--"))
             {
-                throw new ArgumentParserException("--{0} does not take a value.", Name);
+                throw new ArgumentParserException("Unsupported or invalid argument: {0}", pArg);
+            }
+
+            int first = pArg.IndexOf('=');
+            if (first == -1)
+            {
+                Name = pArg.Substring(2).ToLower();
+            }
+            else
+            {
+                Name = pArg.Substring(2, first - 2).ToLower();
+                Value = pArg.Substring(first + 1).Trim();
             }
         }
 
-        public bool isSet()
-        {
-            return !string.IsNullOrWhiteSpace(_value);
-        }
-
         /// <summary>
-        /// Checks if the parameter is in a valid state.
+        /// Determines whether the specified objects are equal.
         /// </summary>
-        public bool isValid()
+        public bool Equals(ArgumentValue pArg1, ArgumentValue pArg2)
         {
-            if (!Required && !Enabled)
+            //Check whether the compared objects reference the same data. 
+            if (ReferenceEquals(pArg1, pArg2))
             {
                 return true;
             }
 
-            if (Required && !Enabled)
+            //Check whether any of the compared objects is null. 
+            if (ReferenceEquals(pArg1, null) || ReferenceEquals(pArg2, null))
             {
                 return false;
             }
 
-            return NeedsValue ? !string.IsNullOrWhiteSpace(_value) : string.IsNullOrWhiteSpace(_value);
+            //Check whether the products' properties are equal. 
+            return pArg1.Name == pArg2.Name;
+        }
+
+        /// <summary>
+        /// Returns a hash code for the specified object.
+        /// </summary>
+        public int GetHashCode(ArgumentValue pObj)
+        {
+            return ReferenceEquals(pObj, null) ? 0 : Name.GetHashCode();
         }
     }
 }
