@@ -6,8 +6,13 @@ namespace GemsCLI.Arguments
     /// <summary>
     /// Holds the value of a single command line argument.
     /// </summary>
-    internal class ArgumentValue : IEqualityComparer<ArgumentValue>
+    public class ArgumentValue : IEqualityComparer<ArgumentValue>
     {
+        /// <summary>
+        /// The offset of this argument on the command line.
+        /// </summary>
+        public readonly int Index;
+
         /// <summary>
         /// The name of the argument, or Null.
         /// </summary>
@@ -72,8 +77,14 @@ namespace GemsCLI.Arguments
         /// <summary>
         /// Initializes an instance of this class.
         /// </summary>
-        public ArgumentValue(string pPrefix, string pEquals, string pArg)
+        /// <param name=""></param>
+        /// <param name="pIndex">Zero based offset of this value</param>
+        /// <param name="pPrefix">Prefixed used to match Named parameters.</param>
+        /// <param name="pEquals">Character used for assignment of value to Named parameters.</param>
+        /// <param name="pArg">The string of argument from the command line.</param>
+        public ArgumentValue(int pIndex, string pPrefix, string pEquals, string pArg)
         {
+            Index = pIndex;
             Name = ExtractName(pPrefix, pEquals, pArg);
             Value = ExtractValue(pPrefix, pEquals, pArg);
         }

@@ -6,7 +6,7 @@ namespace GemsCLI.Arguments
     /// <summary>
     /// Describes the traits of an argument.
     /// </summary>
-    internal class Description
+    public class Description
     {
         /// <summary>
         /// The help message for the argument.
@@ -34,12 +34,19 @@ namespace GemsCLI.Arguments
         public readonly iParamType Type;
 
         /// <summary>
-        /// Is the argument set on the command line.
+        /// Initializes the class to represent a passed parameter.
         /// </summary>
-        public bool Enabled { get; private set; }
+        /// <param name="pHelp">Help message</param>
+        /// <param name="pType">Value type converter</param>
+        /// <param name="pScope">Scope of the parameter</param>
+        /// <param name="pOrdinal">Number of occurrences</param>
+        public Description(string pHelp, iParamType pType, eSCOPE pScope, eORDINAL pOrdinal)
+            : this(null, pHelp, pType, pScope, pOrdinal)
+        {
+        }
 
         /// <summary>
-        /// Constructor
+        /// Initializes the class to represent a named parameter.
         /// </summary>
         /// <param name="pName">Name of the parameter</param>
         /// <param name="pHelp">Help message</param>

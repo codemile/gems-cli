@@ -60,7 +60,7 @@ namespace Example
 
             ArgumentList args = Create();
             Parser parser = new Parser(ParserOptions.WindowsStyle, args, pArgs);
-            parser.Dispatch();
+            Console.WriteLine(@"Database address: " + parser.Request["address"][0]);
         }
 
         /// <summary>

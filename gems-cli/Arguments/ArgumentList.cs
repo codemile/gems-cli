@@ -1,31 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
 using GemsCLI.Types;
 
 namespace GemsCLI.Arguments
 {
-    public sealed class ArgumentList
+    public sealed class ArgumentList : List<Description>
     {
         /// <summary>
-        /// A list of arguments.
+        /// Checks if a named parameter already exists in 
+        /// the collection.
         /// </summary>
-        private readonly Dictionary<string, Description> _arguments;
-
-        /// <summary>
-        /// Access a parameter by name.
-        /// </summary>
-        public string this[string pName]
+        /// <param name="pName">The name of the parameter.</param>
+        /// <returns>True if it exists.</returns>
+        private bool Contains(string pName)
         {
-            get { return _arguments[pName].ToString(); }
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public ArgumentList()
-        {
-            _arguments = new Dictionary<string, Description>();
+            return this.FirstOrDefault(pDesc=>pDesc.Name == pName) != null;
         }
 
         /// <summary>
@@ -35,22 +26,20 @@ namespace GemsCLI.Arguments
         /// <param name="pType"></param>
         /// <param name="pScope"></param>
         /// <param name="pOrdinal"></param>
-        public void Add(string pName, string pHelp, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
+        public void Named(string pName, string pHelp, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
                         eORDINAL pOrdinal = eORDINAL.SINGLURAL)
         {
-            if (_arguments.ContainsKey(pName))
+            if (Contains(pName))
             {
                 throw new ArgumentParserException("Argument {0} already set.", pName);
             }
-            _arguments.Add(pName, new Description(pName, pHelp, pType, pScope, pOrdinal));
+            Add(new Description(pName, pHelp, pType, pScope, pOrdinal));
         }
 
-        /// <summary>
-        /// Checks if an argument is set.
-        /// </summary>
-        public bool Has(string pName)
+        public void Passed(string pHelp, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
+                           eORDINAL pOrdinal = eORDINAL.SINGLURAL)
         {
-            return _arguments.ContainsKey(pName) && _arguments[pName].Enabled;
+            Add(new Description(pHelp, pType, pScope, pOrdinal));
         }
     }
 }

@@ -66,7 +66,7 @@ namespace GemsCLI
             eSCOPE pScope = eSCOPE.OPTIONAL,
             eORDINAL pOrdinal = eORDINAL.SINGLURAL)
         {
-            ArgumentList.Add(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pOrdinal);
+            ArgumentList.Named(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pOrdinal);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace GemsCLI
         public void AddString(string pName, eSCOPE pScope = eSCOPE.OPTIONAL,
                               eORDINAL pOrdinal = eORDINAL.SINGLURAL)
         {
-            ArgumentList.Add(pName, getHelp(pName), new ParamString(), pScope, pOrdinal);
+            ArgumentList.Named(pName, getHelp(pName), new ParamString(), pScope, pOrdinal);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace GemsCLI
         public void AddType(string pName, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
                             eORDINAL pOrdinal = eORDINAL.SINGLURAL)
         {
-            ArgumentList.Add(pName, getHelp(pName), pType, pScope, pOrdinal);
+            ArgumentList.Named(pName, getHelp(pName), pType, pScope, pOrdinal);
         }
     }
 }
