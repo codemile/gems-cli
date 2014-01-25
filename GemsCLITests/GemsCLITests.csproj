@@ -61,7 +61,7 @@
     <Compile Include="Test\Validators\ValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gems-cli\GemsCLI.csproj">
+    <ProjectReference Include="..\GemsCLI\GemsCLI.csproj">
       <Project>{B073533B-E6CF-410E-9FD7-EB0014FA26C6}</Project>
       <Name>GemsCLI</Name>
     </ProjectReference>

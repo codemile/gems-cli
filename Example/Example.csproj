@@ -58,12 +58,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\gems-cli\gems-cli.csproj">
-      <Project>{b073533b-e6cf-410e-9fd7-eb0014fa26c6}</Project>
-      <Name>gems-cli</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Help.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Help.Designer.cs</LastGenOutput>
