@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using Example.Properties;
@@ -18,13 +19,13 @@ namespace Example
         /// when arguments are required, and the validation rules
         /// for those arguments.
         /// </summary>
-        private static DescriptionList Create()
+        private static List<Description> Create()
         {
             /**
              * Uses a resource file to define the help messages. Alternatively
              * use the Arguments class and manually provide help messages.
              */
-            HelpResource help = new HelpResource(Help.ResourceManager, new DescriptionList(), false);
+            HelpResource help = new HelpResource(Help.ResourceManager, false);
 
             /**
              * How to define an IP address.
@@ -47,7 +48,7 @@ namespace Example
              */
             help.AddInt("limit", 0, 10);
 
-            return help.DescriptionList;
+            return help.Descriptions;
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace Example
         {
             WriteGreeting();
 
-            DescriptionList descs = Create();
+            List<Description> descs = Create();
             Parser parser = ParserFactory.Create(pArgs, descs);
         }
 

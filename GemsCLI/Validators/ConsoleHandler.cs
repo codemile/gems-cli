@@ -13,7 +13,7 @@ namespace GemsCLI.Validators
 
         private void Write(Description pDesc)
         {
-            if (pDesc.isNamed)
+            if (pDesc.Role == eROLE.NAMED)
             {
                 Console.Error.WriteLine("{0}: option '{1}{2}' is required.", _app, _options.Prefix, pDesc.Name);
                 return;

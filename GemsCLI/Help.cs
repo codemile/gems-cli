@@ -27,7 +27,7 @@ namespace GemsCLI
         /// Constructor
         /// </summary>
         /// <param name="pDescription">The argument descriptions</param>
-        public Help(DescriptionList pDescription)
+        public Help(List<Description> pDescription)
         {
             _messages = new Dictionary<string, string>();
         }

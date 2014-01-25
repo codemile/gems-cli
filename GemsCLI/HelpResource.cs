@@ -1,4 +1,5 @@
-﻿using System.Resources;
+﻿using System.Collections.Generic;
+using System.Resources;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
@@ -11,7 +12,7 @@ namespace GemsCLI
         /// <summary>
         /// The arguments collection
         /// </summary>
-        public readonly DescriptionList DescriptionList;
+        public readonly List<Description> Descriptions;
 
         /// <summary>
         /// Reference to resource to find help messages.
@@ -42,12 +43,11 @@ namespace GemsCLI
         /// Constructor
         /// </summary>
         /// <param name="pResource">The manager with help messages.</param>
-        /// <param name="pDescriptionList">The arguments collection.</param>
         /// <param name="pStrict">Controls the throwing of an exception for missing help.</param>
-        public HelpResource(ResourceManager pResource, DescriptionList pDescriptionList, bool pStrict = true)
+        public HelpResource(ResourceManager pResource, bool pStrict = true)
         {
             _resource = pResource;
-            DescriptionList = pDescriptionList;
+            Descriptions = new List<Description>();
             _strict = pStrict;
         }
 
@@ -66,7 +66,8 @@ namespace GemsCLI
             eSCOPE pScope = eSCOPE.OPTIONAL,
             eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            DescriptionList.Named(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pMultiplicity);
+            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamInt(pMin, pMax), pScope, pMultiplicity);
+            Descriptions.Add(desc);
         }
 
         /// <summary>
@@ -78,7 +79,8 @@ namespace GemsCLI
         public void AddString(string pName, eSCOPE pScope = eSCOPE.OPTIONAL,
                               eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            DescriptionList.Named(pName, getHelp(pName), new ParamString(), pScope, pMultiplicity);
+            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamString(), pScope, pMultiplicity);
+            Descriptions.Add(desc);
         }
 
         /// <summary>
@@ -92,7 +94,8 @@ namespace GemsCLI
         public void AddType(string pName, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
                             eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            DescriptionList.Named(pName, getHelp(pName), pType, pScope, pMultiplicity);
+            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, pType, pScope, pMultiplicity);
+            Descriptions.Add(desc);
         }
     }
 }

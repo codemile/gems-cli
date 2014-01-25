@@ -18,7 +18,7 @@ namespace GemsCLI.Validators
         {
             return from desc in pList
                    where
-                       desc.isNamed &&
+                       desc.Role == eROLE.NAMED &&
                        desc.Scope == eSCOPE.REQUIRED &&
                        !pRequest.Contains(desc.Name)
                    select desc;
@@ -53,7 +53,7 @@ namespace GemsCLI.Validators
         {
             return from desc in pList
                    where
-                       desc.isNamed &&
+                       desc.Role == eROLE.NAMED &&
                        desc.Multiplicity == eMULTIPLICITY.SINGLURAL &&
                        pRequest.Count(desc.Name) > 1
                    select desc;

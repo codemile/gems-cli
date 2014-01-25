@@ -38,6 +38,7 @@
     <Compile Include="Arguments\ArgumentFactory.cs" />
     <Compile Include="Arguments\ArgumentPassed.cs" />
     <Compile Include="Enums\eERROR.cs" />
+    <Compile Include="Enums\eROLE.cs" />
     <Compile Include="Exceptions\GemsCLIException.cs" />
     <Compile Include="Exceptions\InvalidArgumentException.cs" />
     <Compile Include="Help.cs" />
@@ -46,7 +47,6 @@
     <Compile Include="Enums\eSCOPE.cs" />
     <Compile Include="Descriptions\Description.cs" />
     <Compile Include="Arguments\ArgumentNamed.cs" />
-    <Compile Include="Descriptions\DescriptionList.cs" />
     <Compile Include="Exceptions\ArgumentParserException.cs" />
     <Compile Include="Validators\ConsoleHandler.cs" />
     <Compile Include="Validators\iValidator.cs" />
