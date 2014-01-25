@@ -4,34 +4,60 @@ using GemsCLI.Arguments;
 
 namespace GemsCLI
 {
-    public sealed class Request : List<ArgumentValue>
+    public sealed class Request : List<Argument>
     {
-        public List<ArgumentValue> this[string pNamed]
+        /// <summary>
+        /// Selects all the Named arguments that match the name key.
+        /// </summary>
+        /// <param name="pNamed">The name of the argument.</param>
+        /// <returns>A collection of arguments for that name</returns>
+        public List<ArgumentNamed> this[string pNamed]
         {
-            get { return (from value in this where value.isNamed && value.Name == pNamed select value).ToList(); }
+            get
+            {
+                return (from value in this
+                        let named = value as ArgumentNamed
+                        where
+                            named != null &&
+                            named.Name == pNamed
+                        select named).ToList();
+            }
         }
 
         /// <summary>
         /// A collection of Named parameter values.
         /// </summary>
-        public List<ArgumentValue> Named
+        public List<ArgumentNamed> Named
         {
-            get { return (from value in this where value.isNamed select value).ToList(); }
+            get
+            {
+                return (from value in this
+                        let named = value as ArgumentNamed
+                        where named != null
+                        select named).ToList();
+            }
         }
 
         /// <summary>
         /// A collection of Passed parameter values.
         /// </summary>
-        public List<ArgumentValue> Passed
+        public List<ArgumentPassed> Passed
         {
-            get { return (from value in this where !value.isNamed select value).ToList(); }
+            get
+            {
+                return (from value in this
+                        let passed = value as ArgumentPassed
+                        where passed != null
+                        select passed).ToList();
+            }
         }
 
         /// <summary>
         /// Initializes the class with a collection of values.
         /// </summary>
         /// <param name="pValues">Collection of argument values.</param>
-        public Request(IEnumerable<ArgumentValue> pValues) : base(pValues)
+        public Request(IEnumerable<Argument> pValues)
+            : base(pValues)
         {
         }
 
@@ -42,7 +68,9 @@ namespace GemsCLI
         /// <returns>True if at least one exists.</returns>
         public bool Contains(string pName)
         {
-            return this.FirstOrDefault(pValue=>pValue.isNamed && pValue.Name == pName) != null;
+            return this.FirstOrDefault(
+                pValue=>pValue is ArgumentNamed &&
+                        ((ArgumentNamed)pValue).Name == pName) != null;
         }
 
         /// <summary>
@@ -52,7 +80,8 @@ namespace GemsCLI
         /// <returns>How many times this named parameter exists in the request.</returns>
         public int Count(string pName)
         {
-            return Named.Count(pValue=>pValue.Name == pName);
+            return this.Count(pValue=>pValue is ArgumentNamed &&
+                                      ((ArgumentNamed)pValue).Name == pName);
         }
     }
 }

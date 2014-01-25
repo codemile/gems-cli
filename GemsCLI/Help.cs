@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
 
 namespace GemsCLI
 {
@@ -26,8 +26,8 @@ namespace GemsCLI
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="pArgument">The argument descriptions</param>
-        public Help(ArgumentList pArgument)
+        /// <param name="pDescription">The argument descriptions</param>
+        public Help(DescriptionList pDescription)
         {
             _messages = new Dictionary<string, string>();
         }

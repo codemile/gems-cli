@@ -1,5 +1,5 @@
 ﻿using System.Resources;
-using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
 using GemsCLI.Types;
@@ -11,7 +11,7 @@ namespace GemsCLI
         /// <summary>
         /// The arguments collection
         /// </summary>
-        public readonly ArgumentList ArgumentList;
+        public readonly DescriptionList DescriptionList;
 
         /// <summary>
         /// Reference to resource to find help messages.
@@ -42,12 +42,12 @@ namespace GemsCLI
         /// Constructor
         /// </summary>
         /// <param name="pResource">The manager with help messages.</param>
-        /// <param name="pArgumentList">The arguments collection.</param>
+        /// <param name="pDescriptionList">The arguments collection.</param>
         /// <param name="pStrict">Controls the throwing of an exception for missing help.</param>
-        public HelpResource(ResourceManager pResource, ArgumentList pArgumentList, bool pStrict = true)
+        public HelpResource(ResourceManager pResource, DescriptionList pDescriptionList, bool pStrict = true)
         {
             _resource = pResource;
-            ArgumentList = pArgumentList;
+            DescriptionList = pDescriptionList;
             _strict = pStrict;
         }
 
@@ -66,7 +66,7 @@ namespace GemsCLI
             eSCOPE pScope = eSCOPE.OPTIONAL,
             eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            ArgumentList.Named(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pMultiplicity);
+            DescriptionList.Named(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pMultiplicity);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace GemsCLI
         public void AddString(string pName, eSCOPE pScope = eSCOPE.OPTIONAL,
                               eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            ArgumentList.Named(pName, getHelp(pName), new ParamString(), pScope, pMultiplicity);
+            DescriptionList.Named(pName, getHelp(pName), new ParamString(), pScope, pMultiplicity);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace GemsCLI
         public void AddType(string pName, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
                             eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            ArgumentList.Named(pName, getHelp(pName), pType, pScope, pMultiplicity);
+            DescriptionList.Named(pName, getHelp(pName), pType, pScope, pMultiplicity);
         }
     }
 }

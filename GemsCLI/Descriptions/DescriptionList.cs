@@ -4,9 +4,9 @@ using GemsCLI.Enums;
 using GemsCLI.Exceptions;
 using GemsCLI.Types;
 
-namespace GemsCLI.Arguments
+namespace GemsCLI.Descriptions
 {
-    public sealed class ArgumentList : List<Description>
+    public sealed class DescriptionList : List<Description>
     {
         /// <summary>
         /// Checks if a named parameter already exists in

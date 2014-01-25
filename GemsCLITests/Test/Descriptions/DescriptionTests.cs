@@ -1,17 +1,17 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GemsCLITests.Test.Arguments
+namespace GemsCLITests.Test.Descriptions
 {
     [TestClass]
-    public class ArgumentListTests
+    public class DescriptionTests
     {
         [TestMethod]
-        public void NamedTest()
+        public void Description()
         {
         }
 
         [TestMethod]
-        public void PassedTest()
+        public void Description1()
         {
         }
     }

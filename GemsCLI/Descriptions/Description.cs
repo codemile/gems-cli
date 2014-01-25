@@ -1,7 +1,7 @@
 ﻿using GemsCLI.Enums;
 using GemsCLI.Types;
 
-namespace GemsCLI.Arguments
+namespace GemsCLI.Descriptions
 {
     /// <summary>
     /// Describes the traits of an argument.

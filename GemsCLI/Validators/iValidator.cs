@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
 
 namespace GemsCLI.Validators
 {

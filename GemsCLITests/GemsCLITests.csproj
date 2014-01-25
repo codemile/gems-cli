@@ -50,7 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Test\Arguments\ArgumentListTests.cs" />
+    <Compile Include="Test\Descriptions\DescriptionListTests.cs" />
+    <Compile Include="Test\Descriptions\DescriptionTests.cs" />
+    <Compile Include="Test\Arguments\ArgumentFactoryTests.cs" />
+    <Compile Include="Test\Arguments\ArgumentNamedTests.cs" />
+    <Compile Include="Test\Arguments\ArgumentPassedTests.cs" />
     <Compile Include="Test\HelpResourceTests.cs" />
     <Compile Include="Test\ParserFactoryTests.cs" />
     <Compile Include="Test\ParserTests.cs" />
@@ -61,13 +65,13 @@
     <Compile Include="Test\Validators\ValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Mock\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\GemsCLI\GemsCLI.csproj">
       <Project>{B073533B-E6CF-410E-9FD7-EB0014FA26C6}</Project>
       <Name>GemsCLI</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mock\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

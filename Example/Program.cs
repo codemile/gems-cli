@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Example.Properties;
 using GemsCLI;
-using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Types;
 using Help = Example.Properties.Help;
@@ -18,13 +18,13 @@ namespace Example
         /// when arguments are required, and the validation rules
         /// for those arguments.
         /// </summary>
-        private static ArgumentList Create()
+        private static DescriptionList Create()
         {
             /**
              * Uses a resource file to define the help messages. Alternatively
              * use the Arguments class and manually provide help messages.
              */
-            HelpResource help = new HelpResource(Help.ResourceManager, new ArgumentList(), false);
+            HelpResource help = new HelpResource(Help.ResourceManager, new DescriptionList(), false);
 
             /**
              * How to define an IP address.
@@ -47,7 +47,7 @@ namespace Example
              */
             help.AddInt("limit", 0, 10);
 
-            return help.ArgumentList;
+            return help.DescriptionList;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Example
         {
             WriteGreeting();
 
-            ArgumentList descs = Create();
+            DescriptionList descs = Create();
             Parser parser = ParserFactory.Create(pArgs, descs);
         }
 

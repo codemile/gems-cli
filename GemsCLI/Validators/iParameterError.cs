@@ -1,4 +1,4 @@
-﻿using GemsCLI.Arguments;
+﻿using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 
 namespace GemsCLI.Validators
