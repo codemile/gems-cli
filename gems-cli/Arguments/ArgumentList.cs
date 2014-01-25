@@ -9,7 +9,7 @@ namespace GemsCLI.Arguments
     public sealed class ArgumentList : List<Description>
     {
         /// <summary>
-        /// Checks if a named parameter already exists in 
+        /// Checks if a named parameter already exists in
         /// the collection.
         /// </summary>
         /// <param name="pName">The name of the parameter.</param>
@@ -27,7 +27,7 @@ namespace GemsCLI.Arguments
         /// <param name="pScope"></param>
         /// <param name="pMultiplicity"></param>
         public void Named(string pName, string pHelp, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
-                        eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
+                          eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
             if (Contains(pName))
             {

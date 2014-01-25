@@ -14,9 +14,24 @@ namespace GemsCLI.Arguments
         public readonly string Help;
 
         /// <summary>
+        /// The ordinal rule for the parameter.
+        /// </summary>
+        public readonly eMULTIPLICITY Multiplicity;
+
+        /// <summary>
         /// The name of the argument.
         /// </summary>
         public readonly string Name;
+
+        /// <summary>
+        /// The scope of the parameter.
+        /// </summary>
+        public readonly eSCOPE Scope;
+
+        /// <summary>
+        /// The type converter for the parameter.
+        /// </summary>
+        public readonly iParamType Type;
 
         /// <summary>
         /// Is this a Named parameter?
@@ -33,21 +48,6 @@ namespace GemsCLI.Arguments
         {
             get { return !isNamed; }
         }
-
-        /// <summary>
-        /// The ordinal rule for the parameter.
-        /// </summary>
-        public readonly eMULTIPLICITY Multiplicity;
-
-        /// <summary>
-        /// The scope of the parameter.
-        /// </summary>
-        public readonly eSCOPE Scope;
-
-        /// <summary>
-        /// The type converter for the parameter.
-        /// </summary>
-        public readonly iParamType Type;
 
         /// <summary>
         /// Initializes the class to represent a passed parameter.

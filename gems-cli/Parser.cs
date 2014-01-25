@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using GemsCLI.Arguments;
-using GemsCLI.Enums;
 
 namespace GemsCLI
 {
