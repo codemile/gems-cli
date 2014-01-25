@@ -3,6 +3,8 @@ GemsCLI
 
 Library for parsing command line arguments.
 
+> This project is currently in development.
+
 ## Different Parameter Styles
 
 Different parser options cab be used that suite the style of the developer.
