@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace gems_cli_tests.Test
+namespace GemsCLITests.Test
 {
     [TestClass]
     public class ParserFactoryTests

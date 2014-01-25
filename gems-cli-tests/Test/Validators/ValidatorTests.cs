@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace gems_cli_tests.Test.Validators
+namespace GemsCLITests.Test.Validators
 {
     [TestClass]
     public class ValidatorTests
