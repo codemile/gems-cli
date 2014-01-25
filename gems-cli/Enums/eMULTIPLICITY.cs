@@ -3,7 +3,7 @@
     /// <summary>
     /// How many times a parameter is allowed to occur.
     /// </summary>
-    public enum eORDINAL
+    public enum eMULTIPLICITY
     {
         /// <summary>
         /// Once, any more will result in an error

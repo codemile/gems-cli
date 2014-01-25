@@ -6,6 +6,26 @@ namespace GemsCLI
 {
     public sealed class Request : List<ArgumentValue>
     {
+        /// <summary>
+        /// Checks if the request contains a Named parameter.
+        /// </summary>
+        /// <param name="pName">The name of the Named parameter.</param>
+        /// <returns>True if at least one exists.</returns>
+        public bool Contains(string pName)
+        {
+            return this.FirstOrDefault(pValue=>pValue.isNamed && pValue.Name == pName) != null;
+        }
+
+        /// <summary>
+        /// Counts have many Named parameters there are.
+        /// </summary>
+        /// <param name="pName">The name of the Named parameter.</param>
+        /// <returns>How many times this named parameter exists in the request.</returns>
+        public int Count(string pName)
+        {
+            return Named.Count(pValue=>pValue.Name == pName);
+        }
+
         public List<ArgumentValue> this[string pNamed]
         {
             get { return (from value in this where value.isNamed && value.Name == pNamed select value).ToList(); }

@@ -58,15 +58,15 @@ namespace GemsCLI
         /// <param name="pMin">Min value range</param>
         /// <param name="pMax">Max value range</param>
         /// <param name="pScope">Scope of the parameter</param>
-        /// <param name="pOrdinal">Ordinal of the parameter</param>
+        /// <param name="pMultiplicity">Ordinal of the parameter</param>
         public void AddInt(
             string pName,
             int pMin = int.MinValue,
             int pMax = int.MaxValue,
             eSCOPE pScope = eSCOPE.OPTIONAL,
-            eORDINAL pOrdinal = eORDINAL.SINGLURAL)
+            eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            ArgumentList.Named(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pOrdinal);
+            ArgumentList.Named(pName, getHelp(pName), new ParamInt(pMin, pMax), pScope, pMultiplicity);
         }
 
         /// <summary>
@@ -74,11 +74,11 @@ namespace GemsCLI
         /// </summary>
         /// <param name="pName">Unique name of parameter</param>
         /// <param name="pScope">Scope of the parameter</param>
-        /// <param name="pOrdinal">Ordinal of the parameter</param>
+        /// <param name="pMultiplicity">Ordinal of the parameter</param>
         public void AddString(string pName, eSCOPE pScope = eSCOPE.OPTIONAL,
-                              eORDINAL pOrdinal = eORDINAL.SINGLURAL)
+                              eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            ArgumentList.Named(pName, getHelp(pName), new ParamString(), pScope, pOrdinal);
+            ArgumentList.Named(pName, getHelp(pName), new ParamString(), pScope, pMultiplicity);
         }
 
         /// <summary>
@@ -88,11 +88,11 @@ namespace GemsCLI
         /// <param name="pName">Unique name of parameter</param>
         /// <param name="pType">Parameter type</param>
         /// <param name="pScope">Scope of the parameter</param>
-        /// <param name="pOrdinal">Ordinal of the parameter</param>
+        /// <param name="pMultiplicity">Ordinal of the parameter</param>
         public void AddType(string pName, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
-                            eORDINAL pOrdinal = eORDINAL.SINGLURAL)
+                            eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            ArgumentList.Named(pName, getHelp(pName), pType, pScope, pOrdinal);
+            ArgumentList.Named(pName, getHelp(pName), pType, pScope, pMultiplicity);
         }
     }
 }

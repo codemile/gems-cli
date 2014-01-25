@@ -58,9 +58,8 @@ namespace Example
         {
             WriteGreeting();
 
-            ArgumentList args = Create();
-            Parser parser = new Parser(ParserOptions.WindowsStyle, args, pArgs);
-            Console.WriteLine(@"Database address: " + parser.Request["address"][0]);
+            ArgumentList descs = Create();
+            Parser parser = ParserFactory.Create(pArgs, descs);
         }
 
         /// <summary>

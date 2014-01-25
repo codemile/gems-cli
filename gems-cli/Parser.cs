@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GemsCLI.Arguments;
+using GemsCLI.Enums;
 
 namespace GemsCLI
 {
@@ -26,7 +27,6 @@ namespace GemsCLI
         /// The request object that represents the parameter arguments.
         /// </summary>
         public Request Request { get; set; }
-
 
         /// <summary>
         /// Initializes a new instance of GemsCLI.Parser

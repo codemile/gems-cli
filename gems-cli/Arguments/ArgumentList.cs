@@ -25,21 +25,21 @@ namespace GemsCLI.Arguments
         /// <param name="pHelp"></param>
         /// <param name="pType"></param>
         /// <param name="pScope"></param>
-        /// <param name="pOrdinal"></param>
+        /// <param name="pMultiplicity"></param>
         public void Named(string pName, string pHelp, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
-                        eORDINAL pOrdinal = eORDINAL.SINGLURAL)
+                        eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
             if (Contains(pName))
             {
                 throw new ArgumentParserException("Argument {0} already set.", pName);
             }
-            Add(new Description(pName, pHelp, pType, pScope, pOrdinal));
+            Add(new Description(pName, pHelp, pType, pScope, pMultiplicity));
         }
 
         public void Passed(string pHelp, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
-                           eORDINAL pOrdinal = eORDINAL.SINGLURAL)
+                           eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
         {
-            Add(new Description(pHelp, pType, pScope, pOrdinal));
+            Add(new Description(pHelp, pType, pScope, pMultiplicity));
         }
     }
 }

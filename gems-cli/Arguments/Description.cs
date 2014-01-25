@@ -19,9 +19,25 @@ namespace GemsCLI.Arguments
         public readonly string Name;
 
         /// <summary>
+        /// Is this a Named parameter?
+        /// </summary>
+        public bool isNamed
+        {
+            get { return Name != null; }
+        }
+
+        /// <summary>
+        /// Is this a Passed parameter?
+        /// </summary>
+        public bool isPassed
+        {
+            get { return !isNamed; }
+        }
+
+        /// <summary>
         /// The ordinal rule for the parameter.
         /// </summary>
-        public readonly eORDINAL Ordinal;
+        public readonly eMULTIPLICITY Multiplicity;
 
         /// <summary>
         /// The scope of the parameter.
@@ -39,9 +55,9 @@ namespace GemsCLI.Arguments
         /// <param name="pHelp">Help message</param>
         /// <param name="pType">Value type converter</param>
         /// <param name="pScope">Scope of the parameter</param>
-        /// <param name="pOrdinal">Number of occurrences</param>
-        public Description(string pHelp, iParamType pType, eSCOPE pScope, eORDINAL pOrdinal)
-            : this(null, pHelp, pType, pScope, pOrdinal)
+        /// <param name="pMultiplicity">Number of occurrences</param>
+        public Description(string pHelp, iParamType pType, eSCOPE pScope, eMULTIPLICITY pMultiplicity)
+            : this(null, pHelp, pType, pScope, pMultiplicity)
         {
         }
 
@@ -52,14 +68,14 @@ namespace GemsCLI.Arguments
         /// <param name="pHelp">Help message</param>
         /// <param name="pType">Value type converter</param>
         /// <param name="pScope">Scope of the parameter</param>
-        /// <param name="pOrdinal">Number of occurrences</param>
-        public Description(string pName, string pHelp, iParamType pType, eSCOPE pScope, eORDINAL pOrdinal)
+        /// <param name="pMultiplicity">Number of occurrences</param>
+        public Description(string pName, string pHelp, iParamType pType, eSCOPE pScope, eMULTIPLICITY pMultiplicity)
         {
             Name = pName;
             Help = pHelp;
             Type = pType;
             Scope = pScope;
-            Ordinal = pOrdinal;
+            Multiplicity = pMultiplicity;
         }
     }
 }
