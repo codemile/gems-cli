@@ -6,6 +6,7 @@ using Example.Properties;
 using GemsCLI;
 using GemsCLI.Descriptions;
 using GemsCLI.Help;
+using GemsCLI.Output;
 
 namespace Example
 {
@@ -19,10 +20,19 @@ namespace Example
         {
             WriteGreeting();
 
+            ParserOptions options = ParserOptions.WindowsStyle;
+
             List<Description> descs = DescriptionFactory.Create(
-                ParserOptions.WindowsStyle, new HelpResource(Help.ResourceManager),
+                options, new HelpResource(Help.ResourceManager),
                 "/echo [/mode:string#] /address:string /database:string /username:string [/password:string] filename [output:string]"
                 );
+
+            if (pArgs.Length == 0)
+            {
+                HelpOutput help = new HelpOutput(ParserOptions.LinuxStyle);
+                help.Show(descs);
+                return;
+            }
 
             Parser parser = ParserFactory.Create(pArgs, descs);
         }
