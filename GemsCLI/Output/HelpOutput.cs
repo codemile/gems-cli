@@ -14,7 +14,7 @@ namespace GemsCLI.Output
         /// <summary>
         /// The parser options.
         /// </summary>
-        private readonly ParserOptions _options;
+        private readonly CLIOptions _options;
 
         /// <summary>
         /// The output handler.
@@ -128,7 +128,7 @@ namespace GemsCLI.Output
         /// <param name="pOptions">The parser options</param>
         /// <param name="pOutput">The output handler</param>
         /// <param name="pUsageNamed">True to list named parameters in the "usage" description.</param>
-        public HelpOutput(ParserOptions pOptions, iOutputHandler pOutput, bool pUsageNamed = false)
+        public HelpOutput(CLIOptions pOptions, iOutputHandler pOutput, bool pUsageNamed = false)
         {
             _options = pOptions;
             _output = pOutput;
@@ -143,7 +143,8 @@ namespace GemsCLI.Output
             string namedUsage = getNamedUsage(pDescriptions);
             string passedUsage = getPassedUsage(pDescriptions);
 
-            _output.WriteLine(string.Format(Properties.Help.Usage, OutputFormatter.ExecutableName(), namedUsage, passedUsage));
+            _output.WriteLine(string.Format(Properties.Help.Usage, OutputFormatter.ExecutableName(), namedUsage,
+                passedUsage));
 
             int maxNameWidth = getMaxNameWidth(pDescriptions);
 

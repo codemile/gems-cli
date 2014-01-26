@@ -19,7 +19,7 @@ namespace GemsCLI.Descriptions
         /// <param name="pHelpProvider"></param>
         /// <param name="pPattern">A string containing the syntax pattern for the application's argument.</param>
         /// <returns>A collection of descriptions.</returns>
-        public static List<Description> Create(ParserOptions pOptions, iHelpProvider pHelpProvider, string pPattern)
+        public static List<Description> Create(CLIOptions pOptions, iHelpProvider pHelpProvider, string pPattern)
         {
             string[] strings = pPattern.Split(' ');
             return (from str in strings
@@ -36,7 +36,7 @@ namespace GemsCLI.Descriptions
         /// <param name="pPattern">A string containing the syntax of a single argument.</param>
         /// <returns>A description object</returns>
         /// <exception cref="SyntaxErrorException"></exception>
-        public static Description Parse(ParserOptions pOptions, iHelpProvider pHelpProvider, string pPattern)
+        public static Description Parse(CLIOptions pOptions, iHelpProvider pHelpProvider, string pPattern)
         {
             if (string.IsNullOrWhiteSpace(pPattern))
             {

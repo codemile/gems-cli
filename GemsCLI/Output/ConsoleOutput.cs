@@ -12,12 +12,12 @@ namespace GemsCLI.Output
         /// <summary>
         /// The parser options.
         /// </summary>
-        private readonly ParserOptions _options;
+        private readonly CLIOptions _options;
 
         /// <summary>
         /// Initializes this class
         /// </summary>
-        public ConsoleOutput(ParserOptions pOptions)
+        public ConsoleOutput(CLIOptions pOptions)
         {
             _options = pOptions;
         }

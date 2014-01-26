@@ -37,9 +37,12 @@
     <Compile Include="Arguments\Argument.cs" />
     <Compile Include="Arguments\ArgumentFactory.cs" />
     <Compile Include="Arguments\ArgumentPassed.cs" />
+    <Compile Include="Attributes\CliHelp.cs" />
+    <Compile Include="Attributes\CliName.cs" />
     <Compile Include="Descriptions\DescriptionFactory.cs" />
     <Compile Include="Enums\eERROR.cs" />
     <Compile Include="Enums\eROLE.cs" />
+    <Compile Include="Help\HelpReflection.cs" />
     <Compile Include="Properties\Help.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -67,9 +70,8 @@
     <Compile Include="Output\ConsoleOutput.cs" />
     <Compile Include="Validators\iValidator.cs" />
     <Compile Include="Output\iOutputHandler.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="ParserFactory.cs" />
-    <Compile Include="ParserOptions.cs" />
+    <Compile Include="RequestFactory.cs" />
+    <Compile Include="CliOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="Types\iParamType.cs" />
