@@ -40,6 +40,9 @@
     <Compile Include="Descriptions\DescriptionFactory.cs" />
     <Compile Include="Enums\eERROR.cs" />
     <Compile Include="Enums\eROLE.cs" />
+    <Compile Include="Help\HelpDictionary.cs" />
+    <Compile Include="Help\iHelpProvider.cs" />
+    <Compile Include="Output\OutputFormatter.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -48,17 +51,17 @@
     <Compile Include="Exceptions\GemsCLIException.cs" />
     <Compile Include="Exceptions\InvalidArgumentException.cs" />
     <Compile Include="Exceptions\SyntaxErrorException.cs" />
-    <Compile Include="Help.cs" />
-    <Compile Include="HelpResource.cs" />
+    <Compile Include="Output\HelpOutput.cs" />
+    <Compile Include="Help\HelpResource.cs" />
     <Compile Include="Enums\eMULTIPLICITY.cs" />
     <Compile Include="Enums\eSCOPE.cs" />
     <Compile Include="Descriptions\Description.cs" />
     <Compile Include="Arguments\ArgumentNamed.cs" />
-    <Compile Include="Exceptions\ArgumentParserException.cs" />
+    <Compile Include="Exceptions\HelpException.cs" />
     <Compile Include="Types\ParamTypeFactory.cs" />
-    <Compile Include="Validators\ConsoleHandler.cs" />
+    <Compile Include="Output\ConsoleOutput.cs" />
     <Compile Include="Validators\iValidator.cs" />
-    <Compile Include="Validators\iParameterError.cs" />
+    <Compile Include="Output\iOutputHandler.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="ParserFactory.cs" />
     <Compile Include="ParserOptions.cs" />

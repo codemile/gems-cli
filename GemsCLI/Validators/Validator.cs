@@ -2,12 +2,13 @@
 using System.Linq;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
+using GemsCLI.Output;
 
 namespace GemsCLI.Validators
 {
     public class Validator : iValidator
     {
-        private readonly iParameterError _handler;
+        private readonly iOutputHandler _handler;
 
         /// <summary>
         /// Selects all the descriptions of parameters that are
@@ -31,7 +32,7 @@ namespace GemsCLI.Validators
         /// <param name="pDescs">Collection of parameter descriptions.</param>
         /// <param name="pError">Type of error being reported.</param>
         /// <returns>True if any errors reported.</returns>
-        private static bool Report(iParameterError pHandler, IEnumerable<Description> pDescs, eERROR pError)
+        private static bool Report(iOutputHandler pHandler, IEnumerable<Description> pDescs, eERROR pError)
         {
             bool result = false;
             foreach (Description desc in pDescs)
@@ -63,7 +64,7 @@ namespace GemsCLI.Validators
         /// Initializes this class with an error handler.
         /// </summary>
         /// <param name="pHandler">Handles errors found in parameters.</param>
-        public Validator(iParameterError pHandler)
+        public Validator(iOutputHandler pHandler)
         {
             _handler = pHandler;
         }

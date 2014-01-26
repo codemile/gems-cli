@@ -135,9 +135,9 @@ namespace GemsCLI.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Help not defined for {0}.
         /// </summary>
-        public static string HelpResourceNotFound {
+        public static string HelpNotFound {
             get {
-                return ResourceManager.GetString("HelpResourceNotFound", resourceCulture);
+                return ResourceManager.GetString("HelpNotFound", resourceCulture);
             }
         }
         

@@ -4,6 +4,7 @@ using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
 using GemsCLI.Types;
+using GemsCLITests.Mock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GemsCLITests.Test.Descriptions
@@ -13,7 +14,7 @@ namespace GemsCLITests.Test.Descriptions
     {
         private static void AssertMultiple(ParserOptions pOptions, string pPattern)
         {
-            Description desc = DescriptionFactory.Parse(pOptions, pPattern);
+            Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eMULTIPLICITY.MULTIPLE, desc.Multiplicity);
 
             AssertOptional(pOptions, "[" + pPattern + "]");
@@ -21,7 +22,7 @@ namespace GemsCLITests.Test.Descriptions
 
         private static void AssertNamed(ParserOptions pOptions, string pPattern)
         {
-            Description desc = DescriptionFactory.Parse(pOptions, pPattern);
+            Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eROLE.NAMED, desc.Role);
 
             AssertTypes(pOptions, pPattern);
@@ -29,13 +30,13 @@ namespace GemsCLITests.Test.Descriptions
 
         private static void AssertOptional(ParserOptions pOptions, string pPattern)
         {
-            Description desc = DescriptionFactory.Parse(pOptions, pPattern);
+            Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eSCOPE.OPTIONAL, desc.Scope);
         }
 
         private static void AssertParsable(ParserOptions pOptions, string pName)
         {
-            Description desc = DescriptionFactory.Parse(pOptions, pName);
+            Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pName);
             Assert.AreEqual(pName, desc.Name);
             Assert.AreEqual(eSCOPE.REQUIRED, desc.Scope);
             Assert.AreEqual(eMULTIPLICITY.ONCE, desc.Multiplicity);
@@ -46,7 +47,7 @@ namespace GemsCLITests.Test.Descriptions
 
         private static void AssertPassed(ParserOptions pOptions, string pPattern)
         {
-            Description desc = DescriptionFactory.Parse(pOptions, pPattern);
+            Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eROLE.PASSED, desc.Role);
 
             AssertMultiple(pOptions, pPattern + "#");
@@ -55,7 +56,7 @@ namespace GemsCLITests.Test.Descriptions
 
         private static void AssertType<T>(ParserOptions pOptions, string pPattern)
         {
-            Description desc = DescriptionFactory.Parse(pOptions, pPattern);
+            Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.IsNotNull(desc.Type);
             Assert.IsTrue(desc.Type is T);
 
@@ -74,7 +75,7 @@ namespace GemsCLITests.Test.Descriptions
         {
             List<Description> descs = DescriptionFactory
                 .Create(
-                    ParserOptions.WindowsStyle,
+                    ParserOptions.WindowsStyle, new MockHelpProvider(),
                     "/debug /database:STRING /port:int# [/UserName:string] filename [INPUT:int#]"
                 );
 
@@ -143,7 +144,8 @@ namespace GemsCLITests.Test.Descriptions
             {
                 try
                 {
-                    Description desc = DescriptionFactory.Parse(ParserOptions.WindowsStyle, invalid);
+                    Description desc = DescriptionFactory.Parse(ParserOptions.WindowsStyle, new MockHelpProvider(),
+                        invalid);
                     Assert.Fail("Expected SyntaxErrorException for {0}", invalid);
                 }
                 catch (SyntaxErrorException)

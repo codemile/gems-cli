@@ -1,11 +1,11 @@
 ﻿namespace GemsCLI.Exceptions
 {
-    public class ArgumentParserException : GemsCLIException
+    public class HelpException : GemsCLIException
     {
         /// <summary>
         /// String Format constructor
         /// </summary>
-        public ArgumentParserException(string pMessage, params object[] pValues)
+        public HelpException(string pMessage, params object[] pValues)
             : base(string.Format(pMessage, pValues))
         {
         }

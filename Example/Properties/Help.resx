@@ -117,7 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="address" xml:space="preserve">
+    <value>The IP address of the server.</value>
+  </data>
   <data name="database" xml:space="preserve">
     <value>The name of the database.</value>
+  </data>
+  <data name="echo" xml:space="preserve">
+    <value>Enables echoing out to the console.</value>
+  </data>
+  <data name="filename" xml:space="preserve">
+    <value>The name of the file to read.</value>
+  </data>
+  <data name="mode" xml:space="preserve">
+    <value>The mode of the example.</value>
+  </data>
+  <data name="output" xml:space="preserve">
+    <value>The name of the file to write.</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>The password to use.</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>The username to use.</value>
   </data>
 </root>

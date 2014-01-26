@@ -61,11 +61,74 @@ namespace Example.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The IP address of the server..
+        /// </summary>
+        internal static string address {
+            get {
+                return ResourceManager.GetString("address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name of the database..
         /// </summary>
         internal static string database {
             get {
                 return ResourceManager.GetString("database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enables echoing out to the console..
+        /// </summary>
+        internal static string echo {
+            get {
+                return ResourceManager.GetString("echo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of the file to read..
+        /// </summary>
+        internal static string filename {
+            get {
+                return ResourceManager.GetString("filename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The mode of the example..
+        /// </summary>
+        internal static string mode {
+            get {
+                return ResourceManager.GetString("mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of the file to write..
+        /// </summary>
+        internal static string output {
+            get {
+                return ResourceManager.GetString("output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password to use..
+        /// </summary>
+        internal static string password {
+            get {
+                return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The username to use..
+        /// </summary>
+        internal static string username {
+            get {
+                return ResourceManager.GetString("username", resourceCulture);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GemsCLI.Descriptions;
+using GemsCLI.Output;
 using GemsCLI.Validators;
 
 namespace GemsCLI
@@ -13,7 +14,7 @@ namespace GemsCLI
 
         public static Parser Create(ParserOptions pOptions, IEnumerable<string> pArgs, List<Description> pDescs)
         {
-            return Create(pOptions, new Validator(new ConsoleHandler(pOptions)), pArgs, pDescs);
+            return Create(pOptions, new Validator(new ConsoleOutput(pOptions)), pArgs, pDescs);
         }
 
         public static Parser Create(ParserOptions pOptions, iValidator pValidator, IEnumerable<string> pArgs,

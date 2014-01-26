@@ -141,7 +141,7 @@
   <data name="DescriptionTypeRequired" xml:space="preserve">
     <value>Passed parameters must have a type.</value>
   </data>
-  <data name="HelpResourceNotFound" xml:space="preserve">
+  <data name="HelpNotFound" xml:space="preserve">
     <value>Help not defined for {0}</value>
   </data>
   <data name="ParamTypeFactoryNull" xml:space="preserve">

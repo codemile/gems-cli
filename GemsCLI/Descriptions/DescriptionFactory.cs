@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
+using GemsCLI.Help;
 using GemsCLI.Properties;
 using GemsCLI.Types;
 
@@ -15,14 +16,15 @@ namespace GemsCLI.Descriptions
         /// of parameters.
         /// </summary>
         /// <param name="pOptions">Parser options to use.</param>
+        /// <param name="pHelpProvider"></param>
         /// <param name="pPattern">A string containing the syntax pattern for the application's argument.</param>
         /// <returns>A collection of descriptions.</returns>
-        public static List<Description> Create(ParserOptions pOptions, string pPattern)
+        public static List<Description> Create(ParserOptions pOptions, iHelpProvider pHelpProvider, string pPattern)
         {
             string[] strings = pPattern.Split(' ');
             return (from str in strings
                     where !string.IsNullOrWhiteSpace(str)
-                    select Parse(pOptions, str)).ToList();
+                    select Parse(pOptions, pHelpProvider, str)).ToList();
         }
 
         /// <summary>
@@ -30,10 +32,11 @@ namespace GemsCLI.Descriptions
         /// initialized description object.
         /// </summary>
         /// <param name="pOptions">Parsing options to use.</param>
+        /// <param name="pHelpProvider"></param>
         /// <param name="pPattern">A string containing the syntax of a single argument.</param>
         /// <returns>A description object</returns>
         /// <exception cref="SyntaxErrorException"></exception>
-        public static Description Parse(ParserOptions pOptions, string pPattern)
+        public static Description Parse(ParserOptions pOptions, iHelpProvider pHelpProvider, string pPattern)
         {
             if (string.IsNullOrWhiteSpace(pPattern))
             {
@@ -61,7 +64,14 @@ namespace GemsCLI.Descriptions
                 paramType = new ParamString();
             }
 
-            return new Description(name, "", role, paramType, scope, multi);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new SyntaxErrorException(Errors.DescriptionName);
+            }
+
+            string help = pHelpProvider.Get(name);
+
+            return new Description(name, help, role, paramType, scope, multi);
         }
     }
 }

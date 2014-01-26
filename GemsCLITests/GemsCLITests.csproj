@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mock\MockHelpProvider.cs" />
     <Compile Include="Mock\MockParamType.cs" />
     <Compile Include="Test\Descriptions\DescriptionFactoryTests.cs" />
     <Compile Include="Test\Descriptions\DescriptionTests.cs" />
