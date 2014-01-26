@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using GemsCLI.Enums;
 
@@ -18,6 +19,16 @@ namespace GemsCLI.Output
             Assembly assembly = Assembly.GetEntryAssembly();
             FileVersionInfo info = FileVersionInfo.GetVersionInfo(assembly.Location);
             return info.ProductName;
+        }
+
+        /// <summary>
+        /// Gives the name of the executable file for the current process.
+        /// </summary>
+        /// <returns>The filename without extension.</returns>
+        public static string ExecutableName()
+        {
+            string full = Assembly.GetEntryAssembly().Location;
+            return Path.GetFileNameWithoutExtension(full);
         }
 
         /// <summary>

@@ -29,7 +29,7 @@ namespace Example
 
             if (pArgs.Length == 0)
             {
-                HelpOutput help = new HelpOutput(ParserOptions.LinuxStyle);
+                HelpOutput help = new HelpOutput(ParserOptions.LinuxStyle, new ConsoleOutput(ParserOptions.LinuxStyle));
                 help.Show(descs);
                 return;
             }
