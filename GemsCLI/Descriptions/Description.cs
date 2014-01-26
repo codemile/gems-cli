@@ -1,4 +1,6 @@
-﻿using GemsCLI.Enums;
+﻿using System.Text.RegularExpressions;
+using GemsCLI.Enums;
+using GemsCLI.Exceptions;
 using GemsCLI.Types;
 
 namespace GemsCLI.Descriptions
@@ -49,7 +51,22 @@ namespace GemsCLI.Descriptions
         /// <param name="pMultiplicity">Number of occurrences</param>
         public Description(string pName, string pHelp, eROLE pRole, iParamType pType, eSCOPE pScope, eMULTIPLICITY pMultiplicity)
         {
-            Name = pName;
+            if (string.IsNullOrWhiteSpace(pName))
+            {
+                throw new SyntaxErrorException("Parameter must have name.");
+            }
+
+            if (pRole == eROLE.NAMED && pType == null && pMultiplicity == eMULTIPLICITY.MULTIPLE)
+            {
+                throw new SyntaxErrorException("Named parameters without values can not be multiple.");
+            }
+
+            if (!Regex.IsMatch(pName, @"^[a-z_]\w*$", RegexOptions.IgnoreCase))
+            {
+                throw new SyntaxErrorException("Name must start with letter, and contain alphanumeric only.");
+            }
+
+            Name = pName.ToLower();
             Help = pHelp;
             Role = pRole;
             Type = pType;

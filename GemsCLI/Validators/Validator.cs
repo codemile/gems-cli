@@ -54,7 +54,7 @@ namespace GemsCLI.Validators
             return from desc in pList
                    where
                        desc.Role == eROLE.NAMED &&
-                       desc.Multiplicity == eMULTIPLICITY.SINGLURAL &&
+                       desc.Multiplicity == eMULTIPLICITY.ONCE &&
                        pRequest.Count(desc.Name) > 1
                    select desc;
         }

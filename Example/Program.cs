@@ -21,6 +21,11 @@ namespace Example
         /// </summary>
         private static List<Description> Create()
         {
+            return DescriptionFactory.Create(
+                ParserOptions.WindowsStyle,
+                "/echo [/mode:string...] /address:ip /database:string /username:string [/password:string] filename [output:string]"
+                );
+
             /**
              * Uses a resource file to define the help messages. Alternatively
              * use the Arguments class and manually provide help messages.

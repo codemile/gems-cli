@@ -9,10 +9,5 @@ namespace GemsCLITests.Test.Descriptions
         public void Description()
         {
         }
-
-        [TestMethod]
-        public void Description1()
-        {
-        }
     }
 }

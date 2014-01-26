@@ -64,7 +64,7 @@ namespace GemsCLI
             int pMin = int.MinValue,
             int pMax = int.MaxValue,
             eSCOPE pScope = eSCOPE.OPTIONAL,
-            eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
+            eMULTIPLICITY pMultiplicity = eMULTIPLICITY.ONCE)
         {
             Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamInt(pMin, pMax), pScope, pMultiplicity);
             Descriptions.Add(desc);
@@ -77,7 +77,7 @@ namespace GemsCLI
         /// <param name="pScope">Scope of the parameter</param>
         /// <param name="pMultiplicity">Ordinal of the parameter</param>
         public void AddString(string pName, eSCOPE pScope = eSCOPE.OPTIONAL,
-                              eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
+                              eMULTIPLICITY pMultiplicity = eMULTIPLICITY.ONCE)
         {
             Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamString(), pScope, pMultiplicity);
             Descriptions.Add(desc);
@@ -92,7 +92,7 @@ namespace GemsCLI
         /// <param name="pScope">Scope of the parameter</param>
         /// <param name="pMultiplicity">Ordinal of the parameter</param>
         public void AddType(string pName, iParamType pType, eSCOPE pScope = eSCOPE.OPTIONAL,
-                            eMULTIPLICITY pMultiplicity = eMULTIPLICITY.SINGLURAL)
+                            eMULTIPLICITY pMultiplicity = eMULTIPLICITY.ONCE)
         {
             Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, pType, pScope, pMultiplicity);
             Descriptions.Add(desc);

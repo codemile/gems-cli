@@ -8,7 +8,7 @@
         /// <summary>
         /// Once, any more will result in an error
         /// </summary>
-        SINGLURAL,
+        ONCE,
 
         /// <summary>
         /// One or more times (results in a collection)

@@ -50,6 +50,15 @@ Both variations are allowed, but if a second *Passed* parameter is defined as op
 
 *Passed* parameters are taken in the order they appear on the command line. All required *Passed* parameters must appear before optional *Passed* parameters. This is how the parser knows if any required *Passed* parameters are missing.
 
+## Defining Command-line Syntax
+
+The following special characters are used to define the command-line parameters that a program uses.
+
+- **[ ]** Identifies an optional argument. Arguments that are not enclosed in brackets are required.
+- **#** Indicates that an argument can occur multiple times.
+- **|** Indicates an alias for a named parameter.
+- **< >** Indicates a Passed by value parameter.
+
 ## Just The Request Object
 
 At it's most basic form the library can be used to create a `GemsCLI.Request` object. To give developers unrestricted access to the command line parameters as string data.
