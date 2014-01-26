@@ -1,4 +1,5 @@
 ﻿using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 
 namespace GemsCLI.Arguments
 {
@@ -23,7 +24,7 @@ namespace GemsCLI.Arguments
         {
             if (string.IsNullOrWhiteSpace(pName))
             {
-                throw new InvalidArgumentException("Empty or Null name value not allowed.");
+                throw new InvalidArgumentException(Errors.ArgumentNullName);
             }
             Name = pName;
         }

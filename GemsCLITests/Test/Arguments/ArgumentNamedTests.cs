@@ -24,14 +24,14 @@ namespace GemsCLITests.Test.Arguments
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidArgumentException), "Null name value not allowed.")]
+        [ExpectedException(typeof (InvalidArgumentException))]
         public void ArgumentNamed_1()
         {
             ArgumentNamed arg = new ArgumentNamed(0, null, null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof (InvalidArgumentException), "Empty name value not allowed.")]
+        [ExpectedException(typeof (InvalidArgumentException))]
         public void ArgumentNamed_2()
         {
             ArgumentNamed arg = new ArgumentNamed(0, "", null);

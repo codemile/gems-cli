@@ -1,4 +1,5 @@
 ﻿using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 
 namespace GemsCLI.Arguments
 {
@@ -22,7 +23,7 @@ namespace GemsCLI.Arguments
         {
             if (string.IsNullOrEmpty(pValue))
             {
-                throw new InvalidArgumentException("Empty or Null value not allowed.");
+                throw new InvalidArgumentException(Errors.ArgumentNullName);
             }
 
             Order = 0;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 
 namespace GemsCLI.Arguments
 {
@@ -44,7 +45,7 @@ namespace GemsCLI.Arguments
 
             if (name == null && value == null)
             {
-                throw new InvalidArgumentException("Argument is neither Named or Passed.");
+                throw new InvalidArgumentException(Errors.ArgumentFactoryNull);
             }
 
             if (name == null)

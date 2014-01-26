@@ -9,6 +9,7 @@
         /// Named
         /// </summary>
         NAMED,
+
         /// <summary>
         /// Passed
         /// </summary>

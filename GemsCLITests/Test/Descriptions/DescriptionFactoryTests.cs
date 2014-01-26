@@ -136,7 +136,7 @@ namespace GemsCLITests.Test.Descriptions
             string[] invalidStrings =
             {
                 "/debug#", "", "/", "[]", "[/debug", "/debug]", "/debug:xxxx", "xxx:xxx",
-                "[:xxx]",":","23473","1abc"
+                "[:xxx]", ":", "23473", "1abc"
             };
 
             foreach (string invalid in invalidStrings)

@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mock\MockParamType.cs" />
     <Compile Include="Test\Descriptions\DescriptionFactoryTests.cs" />
     <Compile Include="Test\Descriptions\DescriptionTests.cs" />
     <Compile Include="Test\Arguments\ArgumentFactoryTests.cs" />
@@ -64,9 +65,7 @@
     <Compile Include="Test\Validators\ConsoleHandlerTests.cs" />
     <Compile Include="Test\Validators\ValidatorTests.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mock\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GemsCLI\GemsCLI.csproj">
       <Project>{B073533B-E6CF-410E-9FD7-EB0014FA26C6}</Project>

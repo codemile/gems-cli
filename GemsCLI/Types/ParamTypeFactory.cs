@@ -1,4 +1,5 @@
 ﻿using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 
 namespace GemsCLI.Types
 {
@@ -15,7 +16,7 @@ namespace GemsCLI.Types
         {
             if (string.IsNullOrWhiteSpace(pType))
             {
-                throw new SyntaxErrorException("Parameter type can not be empty.");
+                throw new SyntaxErrorException(Errors.ParamTypeFactoryNull);
             }
 
             switch (pType.Trim().ToLower())
@@ -26,7 +27,7 @@ namespace GemsCLI.Types
                     return new ParamInt();
             }
 
-            throw new SyntaxErrorException("Parameter type {0} is not supported.", pType);
+            throw new SyntaxErrorException(Errors.ParamTypeFactoryUnknown, pType);
         }
     }
 }

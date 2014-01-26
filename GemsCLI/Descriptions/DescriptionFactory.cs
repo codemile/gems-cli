@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 using GemsCLI.Types;
 
 namespace GemsCLI.Descriptions
@@ -37,7 +37,7 @@ namespace GemsCLI.Descriptions
         {
             if (string.IsNullOrWhiteSpace(pPattern))
             {
-                throw new SyntaxErrorException("Empty pattern");
+                throw new SyntaxErrorException(Errors.DescriptionFactoryNoPattern);
             }
 
             string pattern = pPattern.Trim();

@@ -3,6 +3,7 @@ using System.Resources;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 using GemsCLI.Types;
 
 namespace GemsCLI
@@ -34,7 +35,7 @@ namespace GemsCLI
             string help = _resource.GetString(pName);
             if (help == null && _strict)
             {
-                throw new ArgumentParserException("Help not defined for {0}", pName);
+                throw new ArgumentParserException(Errors.HelpResourceNotFound, pName);
             }
             return help ?? "";
         }
@@ -66,7 +67,8 @@ namespace GemsCLI
             eSCOPE pScope = eSCOPE.OPTIONAL,
             eMULTIPLICITY pMultiplicity = eMULTIPLICITY.ONCE)
         {
-            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamInt(pMin, pMax), pScope, pMultiplicity);
+            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamInt(pMin, pMax), pScope,
+                pMultiplicity);
             Descriptions.Add(desc);
         }
 
@@ -79,7 +81,8 @@ namespace GemsCLI
         public void AddString(string pName, eSCOPE pScope = eSCOPE.OPTIONAL,
                               eMULTIPLICITY pMultiplicity = eMULTIPLICITY.ONCE)
         {
-            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamString(), pScope, pMultiplicity);
+            Description desc = new Description(pName, getHelp(pName), eROLE.NAMED, new ParamString(), pScope,
+                pMultiplicity);
             Descriptions.Add(desc);
         }
 

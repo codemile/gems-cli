@@ -40,6 +40,11 @@
     <Compile Include="Descriptions\DescriptionFactory.cs" />
     <Compile Include="Enums\eERROR.cs" />
     <Compile Include="Enums\eROLE.cs" />
+    <Compile Include="Properties\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
     <Compile Include="Exceptions\GemsCLIException.cs" />
     <Compile Include="Exceptions\InvalidArgumentException.cs" />
     <Compile Include="Exceptions\SyntaxErrorException.cs" />
@@ -65,7 +70,12 @@
     <Compile Include="Types\ParamString.cs" />
     <Compile Include="Validators\Validator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
