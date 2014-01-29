@@ -12,7 +12,7 @@ namespace GemsCLITests.Test.Descriptions
     [TestClass]
     public class DescriptionFactoryTests
     {
-        private static void AssertMultiple(ParserOptions pOptions, string pPattern)
+        private static void AssertMultiple(CliOptions pOptions, string pPattern)
         {
             Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eMULTIPLICITY.MULTIPLE, desc.Multiplicity);
@@ -20,7 +20,7 @@ namespace GemsCLITests.Test.Descriptions
             AssertOptional(pOptions, "[" + pPattern + "]");
         }
 
-        private static void AssertNamed(ParserOptions pOptions, string pPattern)
+        private static void AssertNamed(CliOptions pOptions, string pPattern)
         {
             Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eROLE.NAMED, desc.Role);
@@ -28,13 +28,13 @@ namespace GemsCLITests.Test.Descriptions
             AssertTypes(pOptions, pPattern);
         }
 
-        private static void AssertOptional(ParserOptions pOptions, string pPattern)
+        private static void AssertOptional(CliOptions pOptions, string pPattern)
         {
             Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eSCOPE.OPTIONAL, desc.Scope);
         }
 
-        private static void AssertParsable(ParserOptions pOptions, string pName)
+        private static void AssertParsable(CliOptions pOptions, string pName)
         {
             Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pName);
             Assert.AreEqual(pName, desc.Name);
@@ -45,7 +45,7 @@ namespace GemsCLITests.Test.Descriptions
             AssertNamed(pOptions, pOptions.Prefix + pName);
         }
 
-        private static void AssertPassed(ParserOptions pOptions, string pPattern)
+        private static void AssertPassed(CliOptions pOptions, string pPattern)
         {
             Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.AreEqual(eROLE.PASSED, desc.Role);
@@ -54,7 +54,7 @@ namespace GemsCLITests.Test.Descriptions
             AssertTypes(pOptions, pPattern);
         }
 
-        private static void AssertType<T>(ParserOptions pOptions, string pPattern)
+        private static void AssertType<T>(CliOptions pOptions, string pPattern)
         {
             Description desc = DescriptionFactory.Parse(pOptions, new MockHelpProvider(), pPattern);
             Assert.IsNotNull(desc.Type);
@@ -64,7 +64,7 @@ namespace GemsCLITests.Test.Descriptions
             AssertOptional(pOptions, "[" + pPattern + "]");
         }
 
-        private static void AssertTypes(ParserOptions pOptions, string pPattern)
+        private static void AssertTypes(CliOptions pOptions, string pPattern)
         {
             AssertType<ParamString>(pOptions, pPattern + pOptions.EqualChar + "string");
             AssertType<ParamInt>(pOptions, pPattern + pOptions.EqualChar + "int");
@@ -75,7 +75,7 @@ namespace GemsCLITests.Test.Descriptions
         {
             List<Description> descs = DescriptionFactory
                 .Create(
-                    ParserOptions.WindowsStyle, new MockHelpProvider(),
+                    CliOptions.WindowsStyle, new MockHelpProvider(),
                     "/debug /database:STRING /port:int# [/UserName:string] filename [INPUT:int#]"
                 );
 
@@ -121,8 +121,8 @@ namespace GemsCLITests.Test.Descriptions
         public void Parse_0()
         {
             string[] terms = {"debug", "path", "database", "x"};
-            ParserOptions[] options = {ParserOptions.BasicStyle, ParserOptions.WindowsStyle, ParserOptions.LinuxStyle};
-            foreach (ParserOptions option in options)
+            CliOptions[] options = { CliOptions.BasicStyle, CliOptions.WindowsStyle, CliOptions.LinuxStyle };
+            foreach (CliOptions option in options)
             {
                 foreach (string term in terms)
                 {
@@ -144,7 +144,7 @@ namespace GemsCLITests.Test.Descriptions
             {
                 try
                 {
-                    Description desc = DescriptionFactory.Parse(ParserOptions.WindowsStyle, new MockHelpProvider(),
+                    Description desc = DescriptionFactory.Parse(CliOptions.WindowsStyle, new MockHelpProvider(),
                         invalid);
                     Assert.Fail("Expected SyntaxErrorException for {0}", invalid);
                 }

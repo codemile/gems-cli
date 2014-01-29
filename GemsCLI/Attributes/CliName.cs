@@ -12,12 +12,12 @@ namespace GemsCLI.Attributes
         /// <summary>
         /// The name or Null to use property name.
         /// </summary>
-        private readonly string _name;
+        public readonly string Name;
 
         /// <summary>
         /// The role for this parameter.
         /// </summary>
-        private readonly eROLE _role;
+        public readonly eROLE Role;
 
         /// <summary>
         /// Constructor
@@ -26,8 +26,8 @@ namespace GemsCLI.Attributes
         /// <param name="pName">The name of the parameter</param>
         public CliName(eROLE pRole = eROLE.NAMED, string pName = null)
         {
-            _role = pRole;
-            _name = pName;
+            Role = pRole;
+            Name = pName;
         }
     }
 }

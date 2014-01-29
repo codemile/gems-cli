@@ -20,7 +20,7 @@ namespace Example
         {
             WriteGreeting();
 
-            ParserOptions options = ParserOptions.WindowsStyle;
+            CliOptions options = CliOptions.WindowsStyle;
 
             List<Description> descs = DescriptionFactory.Create(
                 options, new HelpResource(Help.ResourceManager),
@@ -29,12 +29,12 @@ namespace Example
 
             if (pArgs.Length == 0)
             {
-                HelpOutput help = new HelpOutput(ParserOptions.LinuxStyle, new ConsoleOutput(ParserOptions.LinuxStyle));
+                HelpOutput help = new HelpOutput(CliOptions.LinuxStyle, new ConsoleOutput(CliOptions.LinuxStyle));
                 help.Show(descs);
                 return;
             }
 
-            Parser parser = ParserFactory.Create(pArgs, descs);
+            Request request = RequestFactory.Create(pArgs, descs);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GemsCLI.Exceptions;
 using GemsCLI.Properties;
 
@@ -13,11 +15,14 @@ namespace GemsCLI.Help
         /// <returns>A help message.</returns>
         public string Get(string pName)
         {
-            if (ContainsKey(pName))
+            string help = (from pair in this
+                           where string.Compare(pair.Key, pName, StringComparison.CurrentCultureIgnoreCase) == 0
+                           select pair.Value).FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(help))
             {
-                return this[pName];
+                throw new HelpException(Errors.HelpNotFound, pName);
             }
-            throw new HelpException(Errors.HelpNotFound, pName);
+            return help;
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using GemsCLI.Exceptions;
-using GemsCLI.Properties;
-
-namespace GemsCLI.Arguments
+﻿namespace GemsCLI.Arguments
 {
     /// <summary>
     /// Identifies an argument as Named
@@ -9,24 +6,14 @@ namespace GemsCLI.Arguments
     public class ArgumentNamed : Argument
     {
         /// <summary>
-        /// The name of the argument, or Null.
-        /// </summary>
-        public readonly string Name;
-
-        /// <summary>
-        /// Initializes an instance of this class.
+        /// Initializes the class
         /// </summary>
         /// <param name="pIndex">The arguments index</param>
         /// <param name="pName">The name of the parameter.</param>
-        /// <param name="pValue">(optional)The argument value</param>
-        public ArgumentNamed(int pIndex, string pName, string pValue)
-            : base(pIndex, pValue)
+        /// <param name="pValueType">(optional)The argument value</param>
+        public ArgumentNamed(int pIndex, string pName, string pValueType)
+            : base(pIndex, pName, pValueType)
         {
-            if (string.IsNullOrWhiteSpace(pName))
-            {
-                throw new InvalidArgumentException(Errors.ArgumentNullName);
-            }
-            Name = pName;
         }
     }
 }

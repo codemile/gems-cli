@@ -14,7 +14,7 @@ namespace GemsCLI.Output
         /// <summary>
         /// The parser options.
         /// </summary>
-        private readonly CLIOptions _options;
+        private readonly CliOptions _options;
 
         /// <summary>
         /// The output handler.
@@ -128,7 +128,7 @@ namespace GemsCLI.Output
         /// <param name="pOptions">The parser options</param>
         /// <param name="pOutput">The output handler</param>
         /// <param name="pUsageNamed">True to list named parameters in the "usage" description.</param>
-        public HelpOutput(CLIOptions pOptions, iOutputHandler pOutput, bool pUsageNamed = false)
+        public HelpOutput(CliOptions pOptions, iOutputHandler pOutput, bool pUsageNamed = false)
         {
             _options = pOptions;
             _output = pOutput;

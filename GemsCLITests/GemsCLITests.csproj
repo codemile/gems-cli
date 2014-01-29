@@ -50,6 +50,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mock\MockHelp.cs" />
+    <Compile Include="Test\Help\HelpReflectionTests.cs" />
+    <Compile Include="Test\Help\HelpDictionaryTests.cs" />
+    <Compile Include="Properties\Help.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Help.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\Attributes\CliNameTests.cs" />
+    <Compile Include="Test\Attributes\CliHelpTests.cs" />
     <Compile Include="Mock\MockHelpProvider.cs" />
     <Compile Include="Mock\MockParamType.cs" />
     <Compile Include="Test\Descriptions\DescriptionFactoryTests.cs" />
@@ -57,7 +67,7 @@
     <Compile Include="Test\Arguments\ArgumentFactoryTests.cs" />
     <Compile Include="Test\Arguments\ArgumentNamedTests.cs" />
     <Compile Include="Test\Arguments\ArgumentPassedTests.cs" />
-    <Compile Include="Test\HelpResourceTests.cs" />
+    <Compile Include="Test\Help\HelpResourceTests.cs" />
     <Compile Include="Test\ParserFactoryTests.cs" />
     <Compile Include="Test\ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,7 +76,12 @@
     <Compile Include="Test\Validators\ConsoleHandlerTests.cs" />
     <Compile Include="Test\Validators\ValidatorTests.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Help.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Help.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GemsCLI\GemsCLI.csproj">
       <Project>{B073533B-E6CF-410E-9FD7-EB0014FA26C6}</Project>

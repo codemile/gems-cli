@@ -41,19 +41,18 @@ namespace GemsCLI.Arguments
         public static Argument Create(int pIndex, string pPrefix, string pEquals, string pArg)
         {
             string name = ExtractName(pPrefix, pEquals, pArg);
-            string value = ExtractValue(pPrefix, pEquals, pArg);
-
-            if (name == null && value == null)
+            if (string.IsNullOrWhiteSpace(name))
             {
-                throw new InvalidArgumentException(Errors.ArgumentFactoryNull);
+                throw new InvalidArgumentException(Errors.ArgumentNullName);
+            }
+            string valueType = ExtractValue(pPrefix, pEquals, pArg);
+
+            if (pArg.StartsWith(pPrefix))
+            {
+                return new ArgumentNamed(pIndex, name, valueType);
             }
 
-            if (name == null)
-            {
-                return new ArgumentPassed(pIndex, value);
-            }
-
-            return new ArgumentNamed(pIndex, name, value);
+            return new ArgumentPassed(pIndex, name, valueType);
         }
 
         /// <summary>
@@ -65,13 +64,10 @@ namespace GemsCLI.Arguments
         /// <returns>The name part or Null if no name.</returns>
         public static string ExtractName(string pPrefix, string pEquals, string pArg)
         {
-            if (!pArg.StartsWith(pPrefix))
-            {
-                return null;
-            }
-            string str = pArg.Substring(pPrefix.Length);
+            string str = pArg.StartsWith(pPrefix) ? pArg.Substring(pPrefix.Length) : pArg;
             int equal = str.IndexOf(pEquals, StringComparison.Ordinal);
-            return equal == -1 ? str.ToLower() : str.Substring(0, equal).ToLower();
+            str = equal == -1 ? str.ToLower() : str.Substring(0, equal).ToLower();
+            return string.IsNullOrWhiteSpace(str) ? null : str;
         }
 
         /// <summary>

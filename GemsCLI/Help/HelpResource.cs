@@ -30,6 +30,7 @@ namespace GemsCLI.Help
         /// <returns>A help message.</returns>
         public string Get(string pName)
         {
+            _resource.IgnoreCase = true;
             string help = _resource.GetString(pName);
             if (string.IsNullOrWhiteSpace(help))
             {

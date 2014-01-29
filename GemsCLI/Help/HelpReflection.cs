@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using GemsCLI.Attributes;
+using GemsCLI.Exceptions;
+using GemsCLI.Properties;
 
 namespace GemsCLI.Help
 {
@@ -10,7 +15,7 @@ namespace GemsCLI.Help
         /// <summary>
         /// The source of help messages.
         /// </summary>
-        private readonly Type _type;
+        private readonly Dictionary<string, string> _help;
 
         /// <summary>
         /// Constructor
@@ -18,7 +23,17 @@ namespace GemsCLI.Help
         /// <param name="pType">The type to inspect</param>
         public HelpReflection(Type pType)
         {
-            _type = pType;
+            _help = (from prop in pType.GetProperties()
+                     from attr in prop.GetCustomAttributes(true)
+                     let help = attr as CliHelp
+                     where help != null
+                     select new {help.Message, Name = prop.Name.ToLower()})
+                .ToDictionary(pKey=>pKey.Name, pValue=>pValue.Message);
+
+            if (_help.Count == 0)
+            {
+                throw new InvalidArgumentException("Type does not contain any help.");
+            }
         }
 
         /// <summary>
@@ -28,7 +43,11 @@ namespace GemsCLI.Help
         /// <returns>A help message.</returns>
         public string Get(string pName)
         {
-            return "There is no help for this option.";
+            if (!_help.ContainsKey(pName))
+            {
+                throw new HelpException(Errors.HelpNotFound, pName);
+            }
+            return _help[pName];
         }
     }
 }

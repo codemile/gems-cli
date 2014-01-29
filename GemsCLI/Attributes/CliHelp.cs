@@ -11,7 +11,7 @@ namespace GemsCLI.Attributes
         /// <summary>
         /// The help message.
         /// </summary>
-        private readonly string _message;
+        public readonly string Message;
 
         /// <summary>
         /// Constructor
@@ -19,7 +19,11 @@ namespace GemsCLI.Attributes
         /// <param name="pMessage">The help message</param>
         public CliHelp(string pMessage)
         {
-            _message = pMessage;
+            if (string.IsNullOrWhiteSpace(pMessage))
+            {
+                throw new ArgumentNullException("pMessage",@"Help messages can not be empty.");
+            }
+            Message = pMessage;
         }
     }
 }

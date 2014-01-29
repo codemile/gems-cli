@@ -10,7 +10,7 @@ namespace GemsCLITests.Test.Arguments
         [TestMethod]
         public void ArgumentPassed_0()
         {
-            ArgumentPassed arg = new ArgumentPassed(0, "document.txt");
+            ArgumentPassed arg = new ArgumentPassed(0, "filename", "document.txt");
             Assert.AreEqual(0, arg.Order);
 
             arg.Order = 99;
@@ -21,14 +21,14 @@ namespace GemsCLITests.Test.Arguments
         [ExpectedException(typeof (InvalidArgumentException), "Null value not allowed.")]
         public void ArgumentPassed_1()
         {
-            ArgumentPassed arg = new ArgumentPassed(0, null);
+            ArgumentPassed arg = new ArgumentPassed(0, "width", null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (InvalidArgumentException), "Empty value not allowed.")]
         public void ArgumentPassed_2()
         {
-            ArgumentPassed arg = new ArgumentPassed(0, "");
+            ArgumentPassed arg = new ArgumentPassed(0, "height", "");
         }
     }
 }

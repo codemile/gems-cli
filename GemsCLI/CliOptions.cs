@@ -1,21 +1,21 @@
 ﻿namespace GemsCLI
 {
-    public class CLIOptions
+    public class CliOptions
     {
         /// <summary>
         /// A generic style "cli -help -user=mathew"
         /// </summary>
-        public static CLIOptions BasicStyle = new CLIOptions {Help = "help", EqualChar = "=", Prefix = "-"};
+        public static CliOptions BasicStyle = new CliOptions {Help = "help", EqualChar = "=", Prefix = "-"};
 
         /// <summary>
         /// Common style for Linux "mysql --help --user=mathew"
         /// </summary>
-        public static CLIOptions LinuxStyle = new CLIOptions {Help = "help", EqualChar = "=", Prefix = "--"};
+        public static CliOptions LinuxStyle = new CliOptions {Help = "help", EqualChar = "=", Prefix = "--"};
 
         /// <summary>
         /// Common style for Windows "dir /? /s /a:d"
         /// </summary>
-        public static CLIOptions WindowsStyle = new CLIOptions {Help = "?", EqualChar = ":", Prefix = "/"};
+        public static CliOptions WindowsStyle = new CliOptions {Help = "?", EqualChar = ":", Prefix = "/"};
 
         /// <summary>
         /// The character used to assign a value to a parameter.
