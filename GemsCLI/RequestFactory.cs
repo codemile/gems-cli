@@ -121,7 +121,7 @@ namespace GemsCLI
                     continue;
                 }
                 // TODO: Support multiples
-                info.SetValue(instance, Convert.ChangeType(request[desc.Name][0].Value, info.PropertyType));
+                info.SetValue(instance, Convert.ChangeType(request.First(desc.Name).Value, info.PropertyType));
             }
 
             return instance;

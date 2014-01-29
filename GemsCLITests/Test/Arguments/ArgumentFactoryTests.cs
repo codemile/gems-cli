@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GemsCLI.Arguments;
+using GemsCLI.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GemsCLITests.Test.Arguments
@@ -47,6 +48,13 @@ namespace GemsCLITests.Test.Arguments
             Assert.AreEqual("debug", arg.Name);
             Assert.AreEqual("on", arg.Value);
             Assert.AreEqual(2, arg.Index);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (InvalidArgumentException))]
+        public void Create_2()
+        {
+            Argument arg = ArgumentFactory.Create(2, "/", "=", "/=on");
         }
 
         [TestMethod]

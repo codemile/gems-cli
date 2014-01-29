@@ -8,21 +8,6 @@ namespace GemsCLI
     public sealed class Request : List<Argument>
     {
         /// <summary>
-        /// Selects all the Named arguments that match the name key.
-        /// </summary>
-        /// <param name="pNamed">The name of the argument.</param>
-        /// <returns>A collection of arguments for that name</returns>
-        public List<Argument> this[string pNamed]
-        {
-            get
-            {
-                return (from value in this
-                        where string.Compare(value.Name, pNamed, StringComparison.OrdinalIgnoreCase) == 0
-                        select value).ToList();
-            }
-        }
-
-        /// <summary>
         /// Initializes the class with a collection of values.
         /// </summary>
         /// <param name="pValues">Collection of argument values.</param>
@@ -49,6 +34,60 @@ namespace GemsCLI
         public int Count(string pName)
         {
             return this.Count(pValue=>pValue.Name == pName);
+        }
+
+        /// <summary>
+        /// Finds the first argument that matches the name.
+        /// </summary>
+        /// <param name="pName">The name of the argument.</param>
+        /// <returns>The argument or null.</returns>
+        public Argument First(string pName)
+        {
+            return this.FirstOrDefault(pArg=>string.Compare(pArg.Name, pName, StringComparison.OrdinalIgnoreCase) == 0);
+        }
+
+        /// <summary>
+        /// Attempts to convert the argument string value to a different type.
+        /// </summary>
+        /// <typeparam name="T">The class type to convert too.</typeparam>
+        /// <param name="pName">Name of the argument.</param>
+        /// <returns>The converted type.</returns>
+        public T Get<T>(string pName)
+        {
+            Argument arg = First(pName);
+            if (arg == null || arg.Value == null)
+            {
+                return default(T);
+            }
+            return (T)Convert.ChangeType(arg.Value, typeof (T));
+        }
+
+        /// <summary>
+        /// Finds all the arguments on the command line for a given name, and converts each
+        /// into the given type returning a collection of that type.
+        /// </summary>
+        /// <typeparam name="T">The class type to convert too.</typeparam>
+        /// <param name="pName">name of the argument</param>
+        /// <returns>An array of that type.</returns>
+        public T[] ToArray<T>(string pName)
+        {
+            return (from arg in this
+                    where string.Compare(arg.Name, pName, StringComparison.OrdinalIgnoreCase) == 0
+                    select (T)Convert.ChangeType(arg.Value, typeof (T))).ToArray();
+        }
+
+        /// <summary>
+        /// Finds all the arguments on the command line for a given name, and converts each
+        /// into the given type returning a collection of that type.
+        /// </summary>
+        /// <typeparam name="T">The class type to convert too.</typeparam>
+        /// <param name="pName">name of the argument</param>
+        /// <returns>A list of that type.</returns>
+        public List<T> ToList<T>(string pName)
+        {
+            return (from arg in this
+                    where string.Compare(arg.Name, pName, StringComparison.OrdinalIgnoreCase) == 0
+                    select (T)Convert.ChangeType(arg.Value, typeof (T))).ToList();
         }
     }
 }

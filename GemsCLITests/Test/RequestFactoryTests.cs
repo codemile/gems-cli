@@ -29,14 +29,11 @@ namespace GemsCLITests.Test
             Request request = RequestFactory.Create(new[] {"/width:100","/height:200"}, descs);
             Assert.IsNotNull(request);
 
-            List<Argument> widths = request["width"];
-            List<Argument> heights = request["height"];
+            int width = request.Get<int>("width");
+            int height = request.Get<int>("height");
 
-            Assert.AreEqual(1, widths.Count);
-            Assert.AreEqual(1, heights.Count);
-
-            Assert.AreEqual("100", widths[0].Value);
-            Assert.AreEqual("200", heights[0].Value);
+            Assert.AreEqual(100, width);
+            Assert.AreEqual(200, height);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
+using GemsCLI.Exceptions;
 
 namespace GemsCLI.Output
 {
@@ -34,9 +35,18 @@ namespace GemsCLI.Output
                 case eERROR.REQUIRED:
                     Console.Error.WriteLine(OutputFormatter.WriteRequired(pDesc.Role, _options.Prefix, pDesc.Name));
                     return;
+                case eERROR.DUPLICATE:
+                    Console.Error.WriteLine(OutputFormatter.WriteDuplicate(pDesc.Role, _options.Prefix, pDesc.Name));
+                    return;
+                case eERROR.MISSING_VALUE:
+                    Console.Error.WriteLine(OutputFormatter.WriteMissingValue(pDesc.Role, _options.Prefix, pDesc.Name));
+                    return;
+                case eERROR.UNKNOWN:
+                    Console.Error.WriteLine(OutputFormatter.WriteUnknown(pDesc.Role, _options.Prefix, pDesc.Name));
+                    return;
             }
 
-            throw new NotImplementedException();
+            throw new InvalidArgumentException("Unsupported error type");
         }
 
         /// <summary>

@@ -9,10 +9,18 @@ namespace GemsCLITests.Test.Help
     public class HelpReflectionTests
     {
         [TestMethod]
-        public void Get()
+        public void Get_0()
         {
             HelpReflection help = new HelpReflection(typeof(MockHelp));
             Assert.AreEqual("The filename to write.", help.Get("filename"));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (HelpException))]
+        public void Get_1()
+        {
+            HelpReflection help = new HelpReflection(typeof(MockHelp));
+            help.Get("mock");
         }
 
         [TestMethod]
