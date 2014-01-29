@@ -18,11 +18,11 @@ namespace GemsCLI.Arguments
         /// </summary>
         /// <param name="pIndex">The position relative to other passed arguments.</param>
         /// <param name="pName">The name of the parameter.</param>
-        /// <param name="pValueType">The argument value.</param>
-        public ArgumentPassed(int pIndex, string pName, string pValueType)
-            : base(pIndex, pName, pValueType)
+        /// <param name="pValue">The argument value.</param>
+        public ArgumentPassed(int pIndex, string pName, string pValue)
+            : base(pIndex, pName, pValue)
         {
-            if (string.IsNullOrEmpty(pValueType))
+            if (string.IsNullOrEmpty(pValue))
             {
                 throw new InvalidArgumentException(Errors.ArgumentNullName);
             }

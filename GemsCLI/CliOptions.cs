@@ -5,17 +5,17 @@
         /// <summary>
         /// A generic style "cli -help -user=mathew"
         /// </summary>
-        public static CliOptions BasicStyle = new CliOptions {Help = "help", EqualChar = "=", Prefix = "-"};
+        public static readonly CliOptions BasicStyle = new CliOptions {Help = "help", EqualChar = "=", Prefix = "-"};
 
         /// <summary>
         /// Common style for Linux "mysql --help --user=mathew"
         /// </summary>
-        public static CliOptions LinuxStyle = new CliOptions {Help = "help", EqualChar = "=", Prefix = "--"};
+        public static readonly CliOptions LinuxStyle = new CliOptions {Help = "help", EqualChar = "=", Prefix = "--"};
 
         /// <summary>
         /// Common style for Windows "dir /? /s /a:d"
         /// </summary>
-        public static CliOptions WindowsStyle = new CliOptions {Help = "?", EqualChar = ":", Prefix = "/"};
+        public static readonly CliOptions WindowsStyle = new CliOptions {Help = "?", EqualChar = ":", Prefix = "/"};
 
         /// <summary>
         /// The character used to assign a value to a parameter.

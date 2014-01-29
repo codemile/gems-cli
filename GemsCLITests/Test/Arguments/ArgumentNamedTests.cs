@@ -14,13 +14,13 @@ namespace GemsCLITests.Test.Arguments
 
             Assert.AreEqual(2, arg.Index);
             Assert.AreEqual("test", arg.Name);
-            Assert.AreEqual("wow", arg.ValueType);
+            Assert.AreEqual("wow", arg.Value);
 
             arg = new ArgumentNamed(6, "test", null);
 
             Assert.AreEqual(6, arg.Index);
             Assert.AreEqual("test", arg.Name);
-            Assert.IsNull(arg.ValueType);
+            Assert.IsNull(arg.Value);
         }
 
         [TestMethod]

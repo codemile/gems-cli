@@ -16,7 +16,7 @@ namespace GemsCLI.Output
         /// <returns>The current application's name.</returns>
         public static string AppName()
         {
-            Assembly assembly = Assembly.GetEntryAssembly();
+            Assembly assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
             FileVersionInfo info = FileVersionInfo.GetVersionInfo(assembly.Location);
             return info.ProductName;
         }

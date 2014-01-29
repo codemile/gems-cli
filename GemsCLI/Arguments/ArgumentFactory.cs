@@ -45,14 +45,14 @@ namespace GemsCLI.Arguments
             {
                 throw new InvalidArgumentException(Errors.ArgumentNullName);
             }
-            string valueType = ExtractValue(pPrefix, pEquals, pArg);
+            string value = ExtractValue(pPrefix, pEquals, pArg);
 
             if (pArg.StartsWith(pPrefix))
             {
-                return new ArgumentNamed(pIndex, name, valueType);
+                return new ArgumentNamed(pIndex, name, value);
             }
 
-            return new ArgumentPassed(pIndex, name, valueType);
+            return new ArgumentPassed(pIndex, name, value);
         }
 
         /// <summary>

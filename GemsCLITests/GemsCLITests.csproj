@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Mock\MockHelp.cs" />
+    <Compile Include="Test\RequestFactoryTests.cs" />
     <Compile Include="Test\Help\HelpReflectionTests.cs" />
     <Compile Include="Test\Help\HelpDictionaryTests.cs" />
     <Compile Include="Properties\Help.Designer.cs">
@@ -71,7 +72,6 @@
     <Compile Include="Test\ParserFactoryTests.cs" />
     <Compile Include="Test\ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\RequestFactoryTests.cs" />
     <Compile Include="Test\RequestTests.cs" />
     <Compile Include="Test\Validators\ConsoleHandlerTests.cs" />
     <Compile Include="Test\Validators\ValidatorTests.cs" />

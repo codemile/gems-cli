@@ -26,6 +26,36 @@ namespace GemsCLI
         }
 
         /// <summary>
+        /// </summary>
+        /// <param name="pOptions"></param>
+        /// <param name="pArgs"></param>
+        /// <param name="pDescs"></param>
+        /// <returns></returns>
+        private static Request Create(CliOptions pOptions, IEnumerable<string> pArgs, IEnumerable<Description> pDescs)
+        {
+            return Create(pOptions, new Validator(new ConsoleOutput(pOptions)), pArgs, pDescs);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="pOptions"></param>
+        /// <param name="pValidator"></param>
+        /// <param name="pArgs"></param>
+        /// <param name="pDescs"></param>
+        /// <returns></returns>
+        private static Request Create(CliOptions pOptions, iValidator pValidator, IEnumerable<string> pArgs,
+                                      IEnumerable<Description> pDescs)
+        {
+            IEnumerable<Argument> arguments = ArgumentFactory.Create(pOptions.Prefix, pOptions.EqualChar, pArgs);
+            Request request = new Request(arguments);
+            if (pValidator != null)
+            {
+                pValidator.Validate(pDescs.ToList(), request);
+            }
+            return request;
+        }
+
+        /// <summary>
         /// Creates descriptions of parameters from the public property members of an
         /// object.
         /// </summary>
@@ -91,7 +121,7 @@ namespace GemsCLI
                     continue;
                 }
                 // TODO: Support multiples
-                info.SetValue(instance, Convert.ChangeType(request[desc.Name][0].ValueType, info.PropertyType));
+                info.SetValue(instance, Convert.ChangeType(request[desc.Name][0].Value, info.PropertyType));
             }
 
             return instance;
@@ -102,39 +132,9 @@ namespace GemsCLI
         /// <param name="pArgs"></param>
         /// <param name="pDescs"></param>
         /// <returns></returns>
-        public static Request Create(IEnumerable<string> pArgs, List<Description> pDescs)
+        public static Request Create(IEnumerable<string> pArgs, IEnumerable<Description> pDescs)
         {
             return Create(CliOptions.WindowsStyle, pArgs, pDescs);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="pOptions"></param>
-        /// <param name="pArgs"></param>
-        /// <param name="pDescs"></param>
-        /// <returns></returns>
-        public static Request Create(CliOptions pOptions, IEnumerable<string> pArgs, List<Description> pDescs)
-        {
-            return Create(pOptions, new Validator(new ConsoleOutput(pOptions)), pArgs, pDescs);
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="pOptions"></param>
-        /// <param name="pValidator"></param>
-        /// <param name="pArgs"></param>
-        /// <param name="pDescs"></param>
-        /// <returns></returns>
-        public static Request Create(CliOptions pOptions, iValidator pValidator, IEnumerable<string> pArgs,
-                                     List<Description> pDescs)
-        {
-            IEnumerable<Argument> arguments = ArgumentFactory.Create(pOptions.Prefix, pOptions.EqualChar, pArgs);
-            Request request = new Request(arguments);
-            if (pValidator != null)
-            {
-                pValidator.Validate(pDescs, request);
-            }
-            return request;
         }
     }
 }

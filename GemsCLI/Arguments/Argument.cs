@@ -22,15 +22,15 @@ namespace GemsCLI.Arguments
         /// <summary>
         /// The value of the argument, or Null
         /// </summary>
-        public readonly string ValueType;
+        public readonly string Value;
 
         /// <summary>
         /// Initializes the class
         /// </summary>
         /// <param name="pIndex">The arguments index</param>
         /// <param name="pName">The name of the parameter.</param>
-        /// <param name="pValueType">(optional)The argument value</param>
-        protected Argument(int pIndex, string pName, string pValueType)
+        /// <param name="pValue">(optional)The argument value</param>
+        protected Argument(int pIndex, string pName, string pValue)
         {
             if (string.IsNullOrWhiteSpace(pName))
             {
@@ -38,7 +38,7 @@ namespace GemsCLI.Arguments
             }
             Name = pName;
             Index = pIndex;
-            ValueType = pValueType;
+            Value = pValue;
         }
     }
 }

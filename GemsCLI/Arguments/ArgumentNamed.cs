@@ -10,9 +10,9 @@
         /// </summary>
         /// <param name="pIndex">The arguments index</param>
         /// <param name="pName">The name of the parameter.</param>
-        /// <param name="pValueType">(optional)The argument value</param>
-        public ArgumentNamed(int pIndex, string pName, string pValueType)
-            : base(pIndex, pName, pValueType)
+        /// <param name="pValue">(optional)The argument value</param>
+        public ArgumentNamed(int pIndex, string pName, string pValue)
+            : base(pIndex, pName, pValue)
         {
         }
     }
