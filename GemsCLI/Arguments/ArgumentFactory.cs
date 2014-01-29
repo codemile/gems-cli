@@ -52,7 +52,7 @@ namespace GemsCLI.Arguments
                 return new ArgumentNamed(pIndex, name, value);
             }
 
-            return new ArgumentPassed(pIndex, name, value);
+            return new ArgumentPassed(pIndex, value);
         }
 
         /// <summary>

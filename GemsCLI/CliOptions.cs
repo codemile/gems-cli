@@ -1,4 +1,6 @@
-﻿namespace GemsCLI
+﻿using System.Collections.Generic;
+
+namespace GemsCLI
 {
     public class CliOptions
     {

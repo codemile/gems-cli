@@ -1,5 +1,9 @@
-﻿using GemsCLI.Arguments;
+﻿using System;
+using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
+using GemsCLI.Enums;
 using GemsCLI.Exceptions;
+using GemsCLI.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GemsCLITests.Test.Arguments
@@ -35,6 +39,16 @@ namespace GemsCLITests.Test.Arguments
         public void ArgumentNamed_2()
         {
             ArgumentNamed arg = new ArgumentNamed(0, "", null);
+        }
+
+        [TestMethod]
+        public void Attach()
+        {
+            Description desc = new Description("filename", "the filename", eROLE.NAMED, new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE);
+            ArgumentNamed arg = new ArgumentNamed(0, "filename", "document.txt");
+            arg.Attach(new[] { desc });
+
+            Assert.IsNotNull(arg.Desc);
         }
     }
 }

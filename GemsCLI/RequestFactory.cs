@@ -33,7 +33,7 @@ namespace GemsCLI
         /// <returns></returns>
         private static Request Create(CliOptions pOptions, IEnumerable<string> pArgs, IEnumerable<Description> pDescs)
         {
-            return Create(pOptions, new Validator(new ConsoleOutput(pOptions)), pArgs, pDescs);
+            return Create(pOptions, new Validator(new ConsoleOutput(pOptions)), pArgs, pDescs.ToList());
         }
 
         /// <summary>
@@ -44,13 +44,13 @@ namespace GemsCLI
         /// <param name="pDescs"></param>
         /// <returns></returns>
         private static Request Create(CliOptions pOptions, iValidator pValidator, IEnumerable<string> pArgs,
-                                      IEnumerable<Description> pDescs)
+                                      ICollection<Description> pDescs)
         {
             IEnumerable<Argument> arguments = ArgumentFactory.Create(pOptions.Prefix, pOptions.EqualChar, pArgs);
-            Request request = new Request(arguments);
+            Request request = new Request(arguments, pDescs);
             if (pValidator != null)
             {
-                pValidator.Validate(pDescs.ToList(), request);
+                request.Valid = pValidator.Validate(pDescs.ToList(), request);
             }
             return request;
         }
@@ -69,10 +69,15 @@ namespace GemsCLI
             List<string> desc = new List<string>();
             foreach (PropertyInfo info in pInfos)
             {
-                CliName attrName = Attribute<CliName>(info);
+                eROLE role = eROLE.PASSED;
+                string name = info.Name.ToLower();
 
-                eROLE role = attrName == null ? eROLE.PASSED : attrName.Role;
-                string name = attrName.Name == null ? info.Name.ToLower() : attrName.Name;
+                CliName attrName = Attribute<CliName>(info);
+                if (attrName != null)
+                {
+                    role = attrName.Role;
+                    name = attrName.Name ?? name;
+                }
 
                 desc.Add(
                     string.Format(
@@ -103,13 +108,18 @@ namespace GemsCLI
         /// <typeparam name="T">The object class to initialize.</typeparam>
         /// <param name="pOptions">The parser options</param>
         /// <param name="pArgs">The command line arguments.</param>
-        /// <returns>A new class T with it's properties populated.</returns>
+        /// <returns>A new class T with it's properties populated, or Null if command line arguments are invalid.</returns>
         public static T Create<T>(CliOptions pOptions, IEnumerable<string> pArgs) where T : class, new()
         {
             PropertyInfo[] infos = typeof (T).GetProperties();
             string pattern = ReflectDescriptions<T>(pOptions, infos);
             List<Description> descs = DescriptionFactory.Create(pOptions, new HelpReflection(typeof (T)), pattern);
+
             Request request = Create(pArgs, descs);
+            if (!request.Valid)
+            {
+                return null;
+            }
 
             T instance = Activator.CreateInstance<T>();
 
@@ -128,13 +138,14 @@ namespace GemsCLI
         }
 
         /// <summary>
+        /// Creates a request object from command line arguments, and a collection of argument descriptions.
         /// </summary>
-        /// <param name="pArgs"></param>
-        /// <param name="pDescs"></param>
-        /// <returns></returns>
+        /// <param name="pArgs">The command line arguments.</param>
+        /// <param name="pDescs">The argument descriptions.</param>
+        /// <returns>The request object.</returns>
         public static Request Create(IEnumerable<string> pArgs, IEnumerable<Description> pDescs)
         {
-            return Create(CliOptions.WindowsStyle, pArgs, pDescs);
+            return Create(CliOptions.WindowsStyle, pArgs, pDescs.ToList());
         }
     }
 }

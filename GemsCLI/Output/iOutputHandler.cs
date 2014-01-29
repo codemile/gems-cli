@@ -1,4 +1,5 @@
-﻿using GemsCLI.Descriptions;
+﻿using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 
 namespace GemsCLI.Output
@@ -17,5 +18,11 @@ namespace GemsCLI.Output
         /// </summary>
         /// <param name="pStr">The string to write.</param>
         void WriteLine(string pStr);
+
+        /// <summary>
+        /// Called when an argument is not recognized.
+        /// </summary>
+        /// <param name="pUnknown">The unknown argument.</param>
+        void Unknown(Argument pUnknown);
     }
 }

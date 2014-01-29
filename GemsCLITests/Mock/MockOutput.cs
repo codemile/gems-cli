@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GemsCLI.Arguments;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Output;
@@ -36,6 +37,15 @@ namespace GemsCLITests.Mock
         public void WriteLine(string pStr)
         {
             Writer.WriteLine(pStr);
+        }
+
+        /// <summary>
+        /// Called when an argument is not recognized.
+        /// </summary>
+        /// <param name="pUnknown">The unknown argument.</param>
+        public void Unknown(Argument pUnknown)
+        {
+            Writer.WriteLine("Unexpected: {0}", pUnknown.Value);
         }
 
         /// <summary>

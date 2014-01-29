@@ -1,5 +1,8 @@
 ﻿using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
+using GemsCLI.Enums;
 using GemsCLI.Exceptions;
+using GemsCLI.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GemsCLITests.Test.Arguments
@@ -10,7 +13,7 @@ namespace GemsCLITests.Test.Arguments
         [TestMethod]
         public void ArgumentPassed_0()
         {
-            ArgumentPassed arg = new ArgumentPassed(0, "filename", "document.txt");
+            ArgumentPassed arg = new ArgumentPassed(0,"document.txt");
             Assert.AreEqual(0, arg.Order);
 
             arg.Order = 99;
@@ -21,14 +24,24 @@ namespace GemsCLITests.Test.Arguments
         [ExpectedException(typeof (InvalidArgumentException), "Null value not allowed.")]
         public void ArgumentPassed_1()
         {
-            ArgumentPassed arg = new ArgumentPassed(0, "width", null);
+            ArgumentPassed arg = new ArgumentPassed(0, null);
         }
 
         [TestMethod]
         [ExpectedException(typeof (InvalidArgumentException), "Empty value not allowed.")]
         public void ArgumentPassed_2()
         {
-            ArgumentPassed arg = new ArgumentPassed(0, "height", "");
+            ArgumentPassed arg = new ArgumentPassed(0, "");
+        }
+
+        [TestMethod]
+        public void Attach()
+        {
+            Description desc = new Description("filename", "the filename", eROLE.PASSED, new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE);
+            ArgumentPassed arg = new ArgumentPassed(0, "document.txt");
+            arg.Attach(new[]{desc});
+
+            Assert.IsNotNull(arg.Desc);
         }
     }
 }

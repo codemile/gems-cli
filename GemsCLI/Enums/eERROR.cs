@@ -16,11 +16,6 @@
         DUPLICATE,
 
         /// <summary>
-        /// An unknown named parameter was found
-        /// </summary>
-        UNKNOWN,
-
-        /// <summary>
         /// A named parameter is missing it's value assignment
         /// </summary>
         MISSING_VALUE

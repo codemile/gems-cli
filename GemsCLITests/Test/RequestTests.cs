@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using GemsCLI;
 using GemsCLI.Arguments;
+using GemsCLI.Descriptions;
+using GemsCLI.Enums;
+using GemsCLI.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GemsCLITests.Test
@@ -10,6 +13,18 @@ namespace GemsCLITests.Test
     {
         private Argument[] _arguments;
         private Request _r;
+
+        [TestMethod]
+        public void Request_0()
+        {
+            Description desc = new Description("filename", "the filename", eROLE.PASSED, new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE);
+            ArgumentPassed passed = new ArgumentPassed(0,"document.txt");
+
+            Request r = new Request(new[]{passed},new[]{desc});
+
+            // ensure description is attached to argument
+            Assert.IsNotNull(passed.Desc);
+        }
 
         [TestMethod]
         public void Contains()
@@ -45,16 +60,24 @@ namespace GemsCLITests.Test
         [TestInitialize]
         public void Init()
         {
+            Description[] descs =
+            {
+                new Description("width","The width",eROLE.NAMED, new ParamInt(),eSCOPE.REQUIRED, eMULTIPLICITY.MULTIPLE ), 
+                new Description("height","The height",eROLE.NAMED, new ParamInt(),eSCOPE.REQUIRED, eMULTIPLICITY.ONCE ), 
+                new Description("filename","The filename",eROLE.PASSED, new ParamString(),eSCOPE.OPTIONAL, eMULTIPLICITY.ONCE ), 
+                new Description("mode","The mode",eROLE.PASSED, new ParamString(),eSCOPE.OPTIONAL, eMULTIPLICITY.ONCE ), 
+            };
+
             _arguments = new Argument[]
                          {
                              new ArgumentNamed(0, "width", "10"),
                              new ArgumentNamed(1, "width", "20"),
                              new ArgumentNamed(2, "height", "30"),
-                             new ArgumentPassed(3, "filename", "document.txt"),
-                             new ArgumentPassed(4, "command", "start")
+                             new ArgumentPassed(3, "document.txt"),
+                             new ArgumentPassed(4, "start")
                          };
             ((ArgumentPassed)_arguments[4]).Order = 1;
-            _r = new Request(_arguments);
+            _r = new Request(_arguments, descs);
         }
 
         [TestMethod]

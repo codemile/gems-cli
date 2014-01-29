@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GemsCLI.Arguments;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Output;
@@ -8,6 +9,9 @@ namespace GemsCLI.Validators
 {
     public class Validator : iValidator
     {
+        /// <summary>
+        /// Provides handling of the console output.
+        /// </summary>
         private readonly iOutputHandler _handler;
 
         /// <summary>
@@ -15,18 +19,17 @@ namespace GemsCLI.Validators
         /// required but missing from the request.
         /// </summary>
         /// <returns>Collection of missing required descriptions.</returns>
-        private static IEnumerable<Description> MissingRequired(IEnumerable<Description> pList, Request pRequest)
+        public static IEnumerable<Description> MissingRequired(IEnumerable<Description> pList, Request pRequest)
         {
             return from desc in pList
                    where
-                       desc.Role == eROLE.NAMED &&
                        desc.Scope == eSCOPE.REQUIRED &&
                        !pRequest.Contains(desc.Name)
                    select desc;
         }
 
         /// <summary>
-        /// Calls the error handler for each description in the collection.
+        /// Prints an error message that relates to the description.
         /// </summary>
         /// <param name="pHandler">Error handler to call.</param>
         /// <param name="pDescs">Collection of parameter descriptions.</param>
@@ -50,7 +53,7 @@ namespace GemsCLI.Validators
         /// <param name="pList">Collection of parameter descriptions.</param>
         /// <param name="pRequest">Requested parameters to validate.</param>
         /// <returns>Collection of descriptions for duplicated parameters.</returns>
-        private static IEnumerable<Description> SelectDuplicates(IEnumerable<Description> pList, Request pRequest)
+        public static IEnumerable<Description> SelectDuplicates(IEnumerable<Description> pList, Request pRequest)
         {
             return from desc in pList
                    where
@@ -58,6 +61,32 @@ namespace GemsCLI.Validators
                        desc.Multiplicity == eMULTIPLICITY.ONCE &&
                        pRequest.Count(desc.Name) > 1
                    select desc;
+        }
+
+        /// <summary>
+        /// Selects all the descriptions of arguments the require a value, the request contains that
+        /// named parameter but no value was provided.
+        /// </summary>
+        /// <param name="pDescs"></param>
+        /// <param name="pRequest"></param>
+        /// <returns></returns>
+        public static IEnumerable<Description> SelectMissingValue(IEnumerable<Description> pDescs, Request pRequest)
+        {
+            // There are two kinds of missing values.
+            // A named without a value, and a passed that was omitted. 
+
+            IEnumerable<Description> missingNamed = from named in pRequest.Named()
+                                                    where named.Desc != null &&
+                                                          named.Desc.Type != null &&
+                                                          named.Value == null
+                                                    select named.Desc;
+
+            IEnumerable<Description> missingPassed = from desc in pDescs
+                                                     where desc.Role == eROLE.PASSED &&
+                                                           !pRequest.Contains(desc.Name)
+                                                     select desc;
+
+            return missingNamed.Union(missingPassed);
         }
 
         /// <summary>
@@ -72,17 +101,27 @@ namespace GemsCLI.Validators
         /// <summary>
         /// Performs a validation check on the current request.
         /// </summary>
-        /// <param name="pList">Collection of description.</param>
+        /// <param name="pDescs">Collection of description.</param>
         /// <param name="pRequest">Request object containing parameters.</param>
         /// <returns>True if parameter pass validation.</returns>
-        public bool Validate(ICollection<Description> pList, Request pRequest)
+        public bool Validate(ICollection<Description> pDescs, Request pRequest)
         {
             if (_handler == null)
             {
                 return true;
             }
-            bool result = !Report(_handler, MissingRequired(pList, pRequest), eERROR.REQUIRED);
-            result &= !Report(_handler, SelectDuplicates(pList, pRequest), eERROR.DUPLICATE);
+
+            bool result = !Report(_handler, MissingRequired(pDescs, pRequest), eERROR.REQUIRED);
+            result &= !Report(_handler, SelectDuplicates(pDescs, pRequest), eERROR.DUPLICATE);
+            result &= !Report(_handler, SelectMissingValue(pDescs, pRequest), eERROR.MISSING_VALUE);
+
+            // check for arguments on the command line that have no matching description
+            foreach (Argument unknown in from arg in pRequest where arg.Desc == null select arg)
+            {
+                _handler.Unknown(unknown);
+                result = false;
+            }
+
             return result;
         }
     }

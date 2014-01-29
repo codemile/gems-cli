@@ -16,7 +16,8 @@ namespace GemsCLITests.Test.Arguments
 
             Assert.AreEqual(5, args.Count);
 
-            Assert.AreEqual("debug", args[0].Name);
+            Assert.IsTrue(args[0] is ArgumentNamed);
+            Assert.AreEqual("debug", ((ArgumentNamed)args[0]).Name);
             Assert.AreEqual("on", args[0].Value);
             Assert.AreEqual(0, args[0].Index);
 
@@ -25,7 +26,8 @@ namespace GemsCLITests.Test.Arguments
             Assert.AreEqual("house", args[1].Value);
             Assert.AreEqual(1, args[1].Index);
 
-            Assert.AreEqual("filter", args[2].Name);
+            Assert.IsTrue(args[2] is ArgumentNamed);
+            Assert.AreEqual("filter", ((ArgumentNamed)args[2]).Name);
             Assert.IsNull(args[2].Value);
             Assert.AreEqual(2, args[2].Index);
 

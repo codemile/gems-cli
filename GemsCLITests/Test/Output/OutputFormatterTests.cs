@@ -47,8 +47,8 @@ namespace GemsCLITests.Test.Output
         public void WriteUnknownTest()
         {
             Assert.AreEqual(
-                "GemsCLI: option '/width' is not supported.", 
-                OutputFormatter.WriteUnknown(eROLE.NAMED, "/", "width"));
+                "GemsCLI: value 'width' is not a recognized option.", 
+                OutputFormatter.WriteUnknown("width"));
         }
     }
 }

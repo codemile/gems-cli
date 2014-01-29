@@ -1,5 +1,5 @@
-﻿using GemsCLI.Exceptions;
-using GemsCLI.Properties;
+﻿using System.Collections.Generic;
+using GemsCLI.Descriptions;
 
 namespace GemsCLI.Arguments
 {
@@ -9,11 +9,6 @@ namespace GemsCLI.Arguments
     /// </summary>
     public abstract class Argument
     {
-        /// <summary>
-        /// The name of the argument.
-        /// </summary>
-        public readonly string Name;
-
         /// <summary>
         /// The index of this argument with other arguments.
         /// </summary>
@@ -25,20 +20,27 @@ namespace GemsCLI.Arguments
         public readonly string Value;
 
         /// <summary>
+        /// The argument description matched to this argument.
+        /// </summary>
+        public Description Desc { get; protected set; }
+
+        /// <summary>
         /// Initializes the class
         /// </summary>
         /// <param name="pIndex">The arguments index</param>
-        /// <param name="pName">The name of the parameter.</param>
         /// <param name="pValue">(optional)The argument value</param>
-        protected Argument(int pIndex, string pName, string pValue)
+        protected Argument(int pIndex, string pValue)
         {
-            if (string.IsNullOrWhiteSpace(pName))
-            {
-                throw new InvalidArgumentException(Errors.ArgumentNullName);
-            }
-            Name = pName;
             Index = pIndex;
             Value = pValue;
         }
+
+        /// <summary>
+        /// Select the one description that best matches this argument, or
+        /// none if there is match.
+        /// </summary>
+        /// <param name="pDescs">A collection of descriptions.</param>
+        /// <returns>True if attached.</returns>
+        public abstract void Attach(IEnumerable<Description> pDescs);
     }
 }

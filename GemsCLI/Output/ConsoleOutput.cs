@@ -1,4 +1,5 @@
 ﻿using System;
+using GemsCLI.Arguments;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
@@ -41,9 +42,6 @@ namespace GemsCLI.Output
                 case eERROR.MISSING_VALUE:
                     Console.Error.WriteLine(OutputFormatter.WriteMissingValue(pDesc.Role, _options.Prefix, pDesc.Name));
                     return;
-                case eERROR.UNKNOWN:
-                    Console.Error.WriteLine(OutputFormatter.WriteUnknown(pDesc.Role, _options.Prefix, pDesc.Name));
-                    return;
             }
 
             throw new InvalidArgumentException("Unsupported error type");
@@ -56,6 +54,15 @@ namespace GemsCLI.Output
         public void WriteLine(string pStr)
         {
             Console.WriteLine(pStr);
+        }
+
+        /// <summary>
+        /// Called when an argument is not recognized.
+        /// </summary>
+        /// <param name="pUnknown">The unknown argument.</param>
+        public void Unknown(Argument pUnknown)
+        {
+            Console.Error.WriteLine(OutputFormatter.WriteUnknown(pUnknown.Value));
         }
     }
 }

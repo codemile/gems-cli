@@ -91,12 +91,11 @@ namespace GemsCLI.Output
         /// <summary>
         /// Formats a message based upon a parameter description.
         /// </summary>
-        /// <param name="pRole">The parameter's role.</param>
-        /// <param name="pPrefix">Prefix used for named parameters.</param>
-        /// <param name="pName">The name of the parameter</param>
-        public static string WriteUnknown(eROLE pRole, string pPrefix, string pName)
+        /// <param name="pValue">The unexpected value.</param>
+        public static string WriteUnknown(string pValue)
         {
-            return getError(pRole, pPrefix, pName, "is not supported");
+            string app = AppName();
+            return string.Format("{0}: value '{1}' is not a recognized option.", app, pValue);
         }
     }
 }

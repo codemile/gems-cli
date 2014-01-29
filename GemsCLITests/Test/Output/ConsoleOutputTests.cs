@@ -50,7 +50,6 @@ namespace GemsCLITests.Test.Output
             Assert.AreEqual("GemsCLI: option '/width' is required.", getError(output, desc, eERROR.REQUIRED));
             Assert.AreEqual("GemsCLI: option '/width' can only be used once.", getError(output, desc, eERROR.DUPLICATE));
             Assert.AreEqual("GemsCLI: option '/width' is missing value.", getError(output, desc, eERROR.MISSING_VALUE));
-            Assert.AreEqual("GemsCLI: option '/width' is not supported.", getError(output, desc, eERROR.UNKNOWN));
         }
 
         [TestMethod]
