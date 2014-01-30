@@ -1,5 +1,4 @@
-﻿using System;
-using GemsCLI.Arguments;
+﻿using GemsCLI.Arguments;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
@@ -9,7 +8,7 @@ namespace GemsCLI.Output
     /// <summary>
     /// Sends output for the parser to the console.
     /// </summary>
-    public class ConsoleOutput : iOutputHandler
+    public class OutputMessages
     {
         /// <summary>
         /// The parser options.
@@ -17,11 +16,17 @@ namespace GemsCLI.Output
         private readonly CliOptions _options;
 
         /// <summary>
+        /// The output handler.
+        /// </summary>
+        private readonly iOutputStream _output;
+
+        /// <summary>
         /// Initializes this class
         /// </summary>
-        public ConsoleOutput(CliOptions pOptions)
+        public OutputMessages(CliOptions pOptions, iOutputStream pOutput)
         {
             _options = pOptions;
+            _output = pOutput;
         }
 
         /// <summary>
@@ -34,26 +39,17 @@ namespace GemsCLI.Output
             switch (pError)
             {
                 case eERROR.REQUIRED:
-                    Console.Error.WriteLine(OutputFormatter.WriteRequired(pDesc.Role, _options.Prefix, pDesc.Name));
+                    _output.Error(OutputFormatter.WriteRequired(pDesc.Role, _options.Prefix, pDesc.Name));
                     return;
                 case eERROR.DUPLICATE:
-                    Console.Error.WriteLine(OutputFormatter.WriteDuplicate(pDesc.Role, _options.Prefix, pDesc.Name));
+                    _output.Error(OutputFormatter.WriteDuplicate(pDesc.Role, _options.Prefix, pDesc.Name));
                     return;
                 case eERROR.MISSING_VALUE:
-                    Console.Error.WriteLine(OutputFormatter.WriteMissingValue(pDesc.Role, _options.Prefix, pDesc.Name));
+                    _output.Error(OutputFormatter.WriteMissingValue(pDesc.Role, _options.Prefix, pDesc.Name));
                     return;
             }
 
             throw new InvalidArgumentException("Unsupported error type");
-        }
-
-        /// <summary>
-        /// Output a line of text to the standard output console.
-        /// </summary>
-        /// <param name="pStr">The string to write.</param>
-        public void WriteLine(string pStr)
-        {
-            Console.WriteLine(pStr);
         }
 
         /// <summary>
@@ -62,7 +58,7 @@ namespace GemsCLI.Output
         /// <param name="pUnknown">The unknown argument.</param>
         public void Unknown(Argument pUnknown)
         {
-            Console.Error.WriteLine(OutputFormatter.WriteUnknown(pUnknown.Value));
+            _output.Error(OutputFormatter.WriteUnknown(pUnknown.Value));
         }
     }
 }

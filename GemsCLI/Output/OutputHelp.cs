@@ -9,7 +9,7 @@ namespace GemsCLI.Output
     /// <summary>
     /// Handles the displaying of help for parameters.
     /// </summary>
-    public class HelpOutput
+    public class OutputHelp
     {
         /// <summary>
         /// The parser options.
@@ -19,7 +19,7 @@ namespace GemsCLI.Output
         /// <summary>
         /// The output handler.
         /// </summary>
-        private readonly iOutputHandler _output;
+        private readonly iOutputStream _output;
 
         /// <summary>
         /// True to show named parameters on usage line.
@@ -79,7 +79,7 @@ namespace GemsCLI.Output
                               pDesc.Name +
                               (pDesc.Scope == eSCOPE.OPTIONAL ? "*" : "");
 
-                _output.WriteLine(string.Format(format,
+                _output.Standard(string.Format(format,
                     name.PadRight(max),
                     lines[i],
                     padding));
@@ -128,7 +128,7 @@ namespace GemsCLI.Output
         /// <param name="pOptions">The parser options</param>
         /// <param name="pOutput">The output handler</param>
         /// <param name="pUsageNamed">True to list named parameters in the "usage" description.</param>
-        public HelpOutput(CliOptions pOptions, iOutputHandler pOutput, bool pUsageNamed = false)
+        public OutputHelp(CliOptions pOptions, iOutputStream pOutput, bool pUsageNamed = false)
         {
             _options = pOptions;
             _output = pOutput;
@@ -143,16 +143,16 @@ namespace GemsCLI.Output
             string namedUsage = getNamedUsage(pDescriptions);
             string passedUsage = getPassedUsage(pDescriptions);
 
-            _output.WriteLine(string.Format(Properties.Help.Usage, OutputFormatter.ExecutableName(), namedUsage,
+            _output.Standard(string.Format(Properties.Help.Usage, OutputFormatter.ExecutableName(), namedUsage,
                 passedUsage));
 
             int maxNameWidth = getMaxNameWidth(pDescriptions);
 
             if (pDescriptions.FirstOrDefault(pDesc=>pDesc.Role == eROLE.NAMED) != null)
             {
-                _output.WriteLine("");
-                _output.WriteLine(Properties.Help.Options);
-                _output.WriteLine("");
+                _output.Standard("");
+                _output.Standard(Properties.Help.Options);
+                _output.Standard("");
                 foreach (Description desc in from desc in pDescriptions where desc.Role == eROLE.NAMED select desc)
                 {
                     Display(maxNameWidth, desc);
@@ -161,7 +161,7 @@ namespace GemsCLI.Output
 
             if (pDescriptions.FirstOrDefault(pDesc=>pDesc.Role == eROLE.PASSED) != null)
             {
-                _output.WriteLine("");
+                _output.Standard("");
                 foreach (Description desc in from desc in pDescriptions where desc.Role == eROLE.PASSED select desc)
                 {
                     Display(maxNameWidth, desc);
@@ -170,8 +170,8 @@ namespace GemsCLI.Output
 
             if (pDescriptions.FirstOrDefault(pDesc=>pDesc.Scope == eSCOPE.OPTIONAL) != null)
             {
-                _output.WriteLine("");
-                _output.WriteLine(Properties.Help.Optional);
+                _output.Standard("");
+                _output.Standard(Properties.Help.Optional);
             }
         }
     }

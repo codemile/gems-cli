@@ -1,7 +1,9 @@
 ﻿using GemsCLI;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
+using GemsCLI.Output;
 using GemsCLI.Types;
+using GemsCLITests.Mock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GemsCLITests.Test
@@ -27,7 +29,7 @@ namespace GemsCLITests.Test
                     eMULTIPLICITY.ONCE)
             };
 
-            Request request = RequestFactory.Create(new[] {"/width:100", "/height:200", "document.txt"}, descs);
+            Request request = RequestFactory.Create(CliOptions.WindowsStyle, new[] { "/width:100", "/height:200", "document.txt" }, descs, new MockOutputFactory());
             Assert.IsNotNull(request);
 
             int width = request.Get<int>("width");

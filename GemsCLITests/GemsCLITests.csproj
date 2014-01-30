@@ -52,8 +52,12 @@
   <ItemGroup>
     <Compile Include="Mock\MockHelp.cs" />
     <Compile Include="Mock\MockOutput.cs" />
+    <Compile Include="Mock\MockOutputFactory.cs" />
+    <Compile Include="Test\Output\ConsoleFactoryTests.cs" />
+    <Compile Include="Test\Output\ConsoleStreamTests.cs" />
+    <Compile Include="Test\Output\DebugStreamTests.cs" />
+    <Compile Include="Test\Output\OutputMessagesTests.cs" />
     <Compile Include="Test\Output\OutputFormatterTests.cs" />
-    <Compile Include="Test\Output\ConsoleOutputTests.cs" />
     <Compile Include="Test\Output\HelpOutputTests.cs" />
     <Compile Include="Test\RequestFactoryTests.cs" />
     <Compile Include="Test\Help\HelpReflectionTests.cs" />

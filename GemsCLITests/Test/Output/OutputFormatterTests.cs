@@ -23,7 +23,7 @@ namespace GemsCLITests.Test.Output
         public void WriteDuplicateTest()
         {
             Assert.AreEqual(
-                "GemsCLI: option '/width' can only be used once.", 
+                "GemsCLI: option '/width' can only be used once.",
                 OutputFormatter.WriteDuplicate(eROLE.NAMED, "/", "width"));
         }
 
@@ -31,7 +31,7 @@ namespace GemsCLITests.Test.Output
         public void WriteMissingValueTest()
         {
             Assert.AreEqual(
-                "GemsCLI: option '/width' is missing value.", 
+                "GemsCLI: option '/width' is missing value.",
                 OutputFormatter.WriteMissingValue(eROLE.NAMED, "/", "width"));
         }
 
@@ -39,7 +39,7 @@ namespace GemsCLITests.Test.Output
         public void WriteRequiredTest()
         {
             Assert.AreEqual(
-                "GemsCLI: option '/width' is required.", 
+                "GemsCLI: option '/width' is required.",
                 OutputFormatter.WriteRequired(eROLE.NAMED, "/", "width"));
         }
 
@@ -47,7 +47,7 @@ namespace GemsCLITests.Test.Output
         public void WriteUnknownTest()
         {
             Assert.AreEqual(
-                "GemsCLI: value 'width' is not a recognized option.", 
+                "GemsCLI: value 'width' is not a recognized option.",
                 OutputFormatter.WriteUnknown("width"));
         }
     }

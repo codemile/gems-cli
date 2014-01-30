@@ -1,51 +1,45 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GemsCLI.Arguments;
-using GemsCLI.Descriptions;
-using GemsCLI.Enums;
 using GemsCLI.Output;
 
 namespace GemsCLITests.Mock
 {
-    public class MockOutput : iOutputHandler
+    public class MockOutput : iOutputStream, IDisposable
     {
-        public readonly StringWriter Writer;
+        private StringWriter _writer;
 
         /// <summary>
         /// Constructor
         /// </summary>
         public MockOutput()
         {
-            Writer = new StringWriter();
+            _writer = new StringWriter();
         }
 
-        /// <summary>
-        /// Called when a validation fails on the parameters.
-        /// </summary>
-        /// <param name="pDesc">The description of the failed parameter.</param>
-        /// <param name="pError">The type of error.</param>
-        public void Error(Description pDesc, eERROR pError)
+        public void Clear()
         {
-            Writer.WriteLine(pError.ToString());
+            Dispose();
+            _writer = new StringWriter();
         }
 
         /// <summary>
-        /// Output a line of text to the standard output console.
+        /// Outputs a single line of text to the error stream.
         /// </summary>
         /// <param name="pStr">The string to write.</param>
-        public void WriteLine(string pStr)
+        public void Error(string pStr)
         {
-            Writer.WriteLine(pStr);
+            _writer.WriteLine(pStr);
         }
 
         /// <summary>
-        /// Called when an argument is not recognized.
+        /// Outputs a single line of text to the standard stream.
         /// </summary>
-        /// <param name="pUnknown">The unknown argument.</param>
-        public void Unknown(Argument pUnknown)
+        /// <param name="pStr">The string to write.</param>
+        public void Standard(string pStr)
         {
-            Writer.WriteLine("Unexpected: {0}", pUnknown.Value);
+            _writer.WriteLine(pStr);
         }
 
         /// <summary>
@@ -54,11 +48,19 @@ namespace GemsCLITests.Mock
         /// <returns>An array of strings</returns>
         public string[] getLines()
         {
-            string[] lines = Writer.ToString().Split('\n');
+            string[] lines = _writer.ToString().Split('\n');
             return (from line in lines
                     let str = line.Trim()
                     where !string.IsNullOrWhiteSpace(str)
-                    select Regex.Replace(str,@"\s+"," ")).ToArray();
+                    select Regex.Replace(str, @"\s+", " ")).ToArray();
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            _writer.Dispose();
         }
     }
 }

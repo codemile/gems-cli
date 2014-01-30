@@ -27,14 +27,16 @@ namespace Example
                 "/echo [/mode:string#] /address:string /database:string /username:string [/password:string] filename [output:string]"
                 );
 
+            ConsoleFactory consoleFactory = new ConsoleFactory();
+
             if (pArgs.Length == 0)
             {
-                HelpOutput help = new HelpOutput(CliOptions.LinuxStyle, new ConsoleOutput(CliOptions.LinuxStyle));
-                help.Show(descs);
+                OutputHelp outputHelp = new OutputHelp(options, consoleFactory.Create());
+                outputHelp.Show(descs);
                 return;
             }
 
-            Request request = RequestFactory.Create(pArgs, descs);
+            Request request = RequestFactory.Create(options, pArgs, descs, consoleFactory);
         }
 
         /// <summary>

@@ -61,15 +61,6 @@ namespace GemsCLI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Argument is neither Named or Passed..
-        /// </summary>
-        public static string ArgumentFactoryNull {
-            get {
-                return ResourceManager.GetString("ArgumentFactoryNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Empty or Null name value not allowed..
         /// </summary>
         public static string ArgumentNullName {

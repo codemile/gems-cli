@@ -28,17 +28,6 @@ namespace GemsCLI
         /// <summary>
         /// </summary>
         /// <param name="pOptions"></param>
-        /// <param name="pArgs"></param>
-        /// <param name="pDescs"></param>
-        /// <returns></returns>
-        private static Request Create(CliOptions pOptions, IEnumerable<string> pArgs, IEnumerable<Description> pDescs)
-        {
-            return Create(pOptions, new Validator(new ConsoleOutput(pOptions)), pArgs, pDescs.ToList());
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="pOptions"></param>
         /// <param name="pValidator"></param>
         /// <param name="pArgs"></param>
         /// <param name="pDescs"></param>
@@ -102,6 +91,23 @@ namespace GemsCLI
         }
 
         /// <summary>
+        /// Creates a request object from the command line arguments.
+        /// </summary>
+        /// <param name="pOptions">The parser options.</param>
+        /// <param name="pArgs">The command line arguments.</param>
+        /// <param name="pDescs">Argument descriptions.</param>
+        /// <param name="pOutput">Factory for handling output.</param>
+        /// <returns></returns>
+        public static Request Create(CliOptions pOptions, IEnumerable<string> pArgs, IEnumerable<Description> pDescs,
+                                     iOutputFactory pOutput)
+        {
+            iOutputStream outputStream = pOutput.Create();
+            OutputMessages outputMessages = new OutputMessages(pOptions, outputStream);
+            Validator validator = new Validator(outputMessages);
+            return Create(pOptions, validator, pArgs, pDescs.ToList());
+        }
+
+        /// <summary>
         /// An easy factory method that uses an object's properties to
         /// define the command line arguments required for the application.
         /// </summary>
@@ -115,7 +121,7 @@ namespace GemsCLI
             string pattern = ReflectDescriptions<T>(pOptions, infos);
             List<Description> descs = DescriptionFactory.Create(pOptions, new HelpReflection(typeof (T)), pattern);
 
-            Request request = Create(pArgs, descs);
+            Request request = Create(pOptions, pArgs, descs, new ConsoleFactory());
             if (!request.Valid)
             {
                 return null;
@@ -135,17 +141,6 @@ namespace GemsCLI
             }
 
             return instance;
-        }
-
-        /// <summary>
-        /// Creates a request object from command line arguments, and a collection of argument descriptions.
-        /// </summary>
-        /// <param name="pArgs">The command line arguments.</param>
-        /// <param name="pDescs">The argument descriptions.</param>
-        /// <returns>The request object.</returns>
-        public static Request Create(IEnumerable<string> pArgs, IEnumerable<Description> pDescs)
-        {
-            return Create(CliOptions.WindowsStyle, pArgs, pDescs.ToList());
         }
     }
 }

@@ -15,32 +15,34 @@ namespace GemsCLITests.Test.Output
         [TestMethod]
         public void HelpOutput()
         {
-            HelpOutput help = new HelpOutput(CliOptions.WindowsStyle, new MockOutput(), true);
+            OutputHelp outputHelp = new OutputHelp(CliOptions.WindowsStyle, new MockOutput(), true);
         }
 
         [TestMethod]
         public void Show_0()
         {
             MockOutput output = new MockOutput();
-            HelpOutput help = new HelpOutput(CliOptions.WindowsStyle, output, true);
+            OutputHelp outputHelp = new OutputHelp(CliOptions.WindowsStyle, output, true);
             List<Description> descs = new List<Description>
                                       {
-                                          new Description("width","The width of the rectangle.", eROLE.NAMED, new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE ),
-                                          new Description("filename","The input file.", eROLE.PASSED, new ParamString(), eSCOPE.OPTIONAL, eMULTIPLICITY.ONCE )
+                                          new Description("width", "The width of the rectangle.", eROLE.NAMED,
+                                              new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE),
+                                          new Description("filename", "The input file.", eROLE.PASSED, new ParamString(),
+                                              eSCOPE.OPTIONAL, eMULTIPLICITY.ONCE)
                                       };
-            help.Show(descs);
+            outputHelp.Show(descs);
 
             string[] lines = output.getLines();
 
             CollectionAssert.AreEqual(
-                new []
+                new[]
                 {
                     "Usage: GemsCLI /width [filename]",
                     "Where options include:",
                     "/width The width of the rectangle.",
                     "filename* The input file.",
                     "* shows optional parameters."
-                }, 
+                },
                 lines);
         }
 
@@ -48,13 +50,15 @@ namespace GemsCLITests.Test.Output
         public void Show_1()
         {
             MockOutput output = new MockOutput();
-            HelpOutput help = new HelpOutput(CliOptions.WindowsStyle, output);
+            OutputHelp outputHelp = new OutputHelp(CliOptions.WindowsStyle, output);
             List<Description> descs = new List<Description>
                                       {
-                                          new Description("width","The width of the rectangle.", eROLE.NAMED, new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE ),
-                                          new Description("filename","The input file.", eROLE.PASSED, new ParamString(), eSCOPE.OPTIONAL, eMULTIPLICITY.ONCE )
+                                          new Description("width", "The width of the rectangle.", eROLE.NAMED,
+                                              new ParamString(), eSCOPE.REQUIRED, eMULTIPLICITY.ONCE),
+                                          new Description("filename", "The input file.", eROLE.PASSED, new ParamString(),
+                                              eSCOPE.OPTIONAL, eMULTIPLICITY.ONCE)
                                       };
-            help.Show(descs);
+            outputHelp.Show(descs);
 
             string[] lines = output.getLines();
 

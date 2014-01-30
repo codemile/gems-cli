@@ -12,7 +12,7 @@ namespace GemsCLI.Validators
         /// <summary>
         /// Provides handling of the console output.
         /// </summary>
-        private readonly iOutputHandler _handler;
+        private readonly OutputMessages _messages;
 
         /// <summary>
         /// Selects all the descriptions of parameters that are
@@ -31,16 +31,15 @@ namespace GemsCLI.Validators
         /// <summary>
         /// Prints an error message that relates to the description.
         /// </summary>
-        /// <param name="pHandler">Error handler to call.</param>
         /// <param name="pDescs">Collection of parameter descriptions.</param>
         /// <param name="pError">Type of error being reported.</param>
         /// <returns>True if any errors reported.</returns>
-        private static bool Report(iOutputHandler pHandler, IEnumerable<Description> pDescs, eERROR pError)
+        private bool Report(IEnumerable<Description> pDescs, eERROR pError)
         {
             bool result = false;
             foreach (Description desc in pDescs)
             {
-                pHandler.Error(desc, pError);
+                _messages.Error(desc, pError);
                 result = true;
             }
             return result;
@@ -92,10 +91,10 @@ namespace GemsCLI.Validators
         /// <summary>
         /// Initializes this class with an error handler.
         /// </summary>
-        /// <param name="pHandler">Handles errors found in parameters.</param>
-        public Validator(iOutputHandler pHandler)
+        /// <param name="pMessages">Handles errors found in parameters.</param>
+        public Validator(OutputMessages pMessages)
         {
-            _handler = pHandler;
+            _messages = pMessages;
         }
 
         /// <summary>
@@ -106,19 +105,19 @@ namespace GemsCLI.Validators
         /// <returns>True if parameter pass validation.</returns>
         public bool Validate(ICollection<Description> pDescs, Request pRequest)
         {
-            if (_handler == null)
+            if (_messages == null)
             {
                 return true;
             }
 
-            bool result = !Report(_handler, MissingRequired(pDescs, pRequest), eERROR.REQUIRED);
-            result &= !Report(_handler, SelectDuplicates(pDescs, pRequest), eERROR.DUPLICATE);
-            result &= !Report(_handler, SelectMissingValue(pDescs, pRequest), eERROR.MISSING_VALUE);
+            bool result = !Report(MissingRequired(pDescs, pRequest), eERROR.REQUIRED);
+            result &= !Report(SelectDuplicates(pDescs, pRequest), eERROR.DUPLICATE);
+            result &= !Report(SelectMissingValue(pDescs, pRequest), eERROR.MISSING_VALUE);
 
             // check for arguments on the command line that have no matching description
             foreach (Argument unknown in from arg in pRequest where arg.Desc == null select arg)
             {
-                _handler.Unknown(unknown);
+                _messages.Unknown(unknown);
                 result = false;
             }
 
