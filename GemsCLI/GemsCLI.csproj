@@ -39,6 +39,7 @@
     <Compile Include="Arguments\ArgumentPassed.cs" />
     <Compile Include="Attributes\CliHelp.cs" />
     <Compile Include="Attributes\CliName.cs" />
+    <Compile Include="Attributes\CliOptional.cs" />
     <Compile Include="Descriptions\DescriptionFactory.cs" />
     <Compile Include="Enums\eERROR.cs" />
     <Compile Include="Enums\eROLE.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Descriptions\Description.cs" />
     <Compile Include="Arguments\ArgumentNamed.cs" />
     <Compile Include="Exceptions\HelpException.cs" />
+    <Compile Include="Types\ParamBool.cs" />
     <Compile Include="Types\ParamTypeFactory.cs" />
     <Compile Include="Output\OutputMessages.cs" />
     <Compile Include="Validators\iValidator.cs" />

@@ -68,13 +68,20 @@ namespace GemsCLI
                     name = attrName.Name ?? name;
                 }
 
-                desc.Add(
-                    string.Format(
-                        "{0}{1}:{2}",
-                        role == eROLE.NAMED ? pOptions.Prefix : "",
-                        name,
-                        info.PropertyType.Name.ToLower()
-                        ));
+                string str = string.Format(
+                    "{0}{1}:{2}",
+                    role == eROLE.NAMED ? pOptions.Prefix : "",
+                    name,
+                    info.PropertyType.Name.ToLower()
+                    );
+
+                CliOptional attrOptional = Attribute<CliOptional>(info);
+                if (attrOptional != null)
+                {
+                    str = string.Format("[{0}]", str);
+                }
+
+                desc.Add(str);
             }
             return string.Join(" ", desc);
         }

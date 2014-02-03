@@ -25,6 +25,8 @@ namespace GemsCLI.Types
                     return new ParamString();
                 case "int":
                     return new ParamInt();
+                case "boolean":
+                    return new ParamBool();
             }
 
             throw new SyntaxErrorException(Errors.ParamTypeFactoryUnknown, pType);
