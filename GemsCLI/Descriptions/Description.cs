@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
 using GemsCLI.Properties;
@@ -9,6 +10,7 @@ namespace GemsCLI.Descriptions
     /// <summary>
     /// Describes the traits of an argument.
     /// </summary>
+    [DebuggerDisplay("{Name} {Role}/{Scope}")]
     public class Description
     {
         /// <summary>
