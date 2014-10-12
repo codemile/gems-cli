@@ -1,4 +1,4 @@
-﻿namespace GemsCLI.Help
+﻿namespace GemsCLI.Helper
 {
     /// <summary>
     /// Providers the help messages for parameter.

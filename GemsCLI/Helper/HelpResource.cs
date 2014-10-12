@@ -2,7 +2,7 @@
 using GemsCLI.Exceptions;
 using GemsCLI.Properties;
 
-namespace GemsCLI.Help
+namespace GemsCLI.Helper
 {
     /// <summary>
     /// Uses a string resource to read help messages.

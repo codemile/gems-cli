@@ -43,7 +43,7 @@
     <Compile Include="Descriptions\DescriptionFactory.cs" />
     <Compile Include="Enums\eERROR.cs" />
     <Compile Include="Enums\eROLE.cs" />
-    <Compile Include="Help\HelpReflection.cs" />
+    <Compile Include="Helper\HelpReflection.cs" />
     <Compile Include="Output\ConsoleFactory.cs" />
     <Compile Include="Output\ConsoleStream.cs" />
     <Compile Include="Output\DebugStream.cs" />
@@ -53,8 +53,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Help.resx</DependentUpon>
     </Compile>
-    <Compile Include="Help\HelpDictionary.cs" />
-    <Compile Include="Help\iHelpProvider.cs" />
+    <Compile Include="Helper\HelpDictionary.cs" />
+    <Compile Include="Helper\iHelpProvider.cs" />
     <Compile Include="Output\OutputFormatter.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -65,7 +65,7 @@
     <Compile Include="Exceptions\InvalidArgumentException.cs" />
     <Compile Include="Exceptions\SyntaxErrorException.cs" />
     <Compile Include="Output\OutputHelp.cs" />
-    <Compile Include="Help\HelpResource.cs" />
+    <Compile Include="Helper\HelpResource.cs" />
     <Compile Include="Enums\eMULTIPLICITY.cs" />
     <Compile Include="Enums\eSCOPE.cs" />
     <Compile Include="Descriptions\Description.cs" />

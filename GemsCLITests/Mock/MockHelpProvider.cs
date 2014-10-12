@@ -1,4 +1,4 @@
-﻿using GemsCLI.Help;
+﻿using GemsCLI.Helper;
 
 namespace GemsCLITests.Mock
 {

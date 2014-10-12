@@ -6,7 +6,7 @@ using GemsCLI.Arguments;
 using GemsCLI.Attributes;
 using GemsCLI.Descriptions;
 using GemsCLI.Enums;
-using GemsCLI.Help;
+using GemsCLI.Helper;
 using GemsCLI.Output;
 using GemsCLI.Validators;
 

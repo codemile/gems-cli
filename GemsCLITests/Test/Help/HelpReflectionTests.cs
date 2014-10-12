@@ -1,5 +1,5 @@
 ﻿using GemsCLI.Exceptions;
-using GemsCLI.Help;
+using GemsCLI.Helper;
 using GemsCLITests.Mock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
