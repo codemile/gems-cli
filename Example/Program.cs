@@ -5,7 +5,7 @@ using System.Reflection;
 using Example.Properties;
 using GemsCLI;
 using GemsCLI.Descriptions;
-using GemsCLI.Help;
+using GemsCLI.Helper;
 using GemsCLI.Output;
 
 namespace Example

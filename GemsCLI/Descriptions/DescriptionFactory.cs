@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GemsCLI.Enums;
 using GemsCLI.Exceptions;
-using GemsCLI.Help;
+using GemsCLI.Helper;
 using GemsCLI.Properties;
 using GemsCLI.Types;
 

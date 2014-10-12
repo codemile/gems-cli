@@ -4,7 +4,7 @@ using System.Linq;
 using GemsCLI.Exceptions;
 using GemsCLI.Properties;
 
-namespace GemsCLI.Help
+namespace GemsCLI.Helper
 {
     public class HelpDictionary : Dictionary<string, string>, iHelpProvider
     {

@@ -5,7 +5,7 @@ using GemsCLI.Attributes;
 using GemsCLI.Exceptions;
 using GemsCLI.Properties;
 
-namespace GemsCLI.Help
+namespace GemsCLI.Helper
 {
     /// <summary>
     /// Uses reflection on an object's type to find help for arguments.
