@@ -50,10 +50,6 @@
     <Compile Include="Output\ConsoleStream.cs" />
     <Compile Include="Output\DebugStream.cs" />
     <Compile Include="Output\iOutputFactory.cs" />
-<<<<<<< HEAD
-    <Compile Include="Help\HelpDictionary.cs" />
-    <Compile Include="Help\iHelpProvider.cs" />
-=======
     <Compile Include="Properties\Help.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -61,7 +57,6 @@
     </Compile>
     <Compile Include="Helper\HelpDictionary.cs" />
     <Compile Include="Helper\iHelpProvider.cs" />
->>>>>>> 0ea554af68709e02f48518b17c4e71bf140314f3
     <Compile Include="Output\OutputFormatter.cs" />
     <Compile Include="Exceptions\GemsCLIException.cs" />
     <Compile Include="Exceptions\InvalidArgumentException.cs" />
