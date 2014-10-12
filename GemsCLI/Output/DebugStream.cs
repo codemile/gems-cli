@@ -10,7 +10,7 @@ namespace GemsCLI.Output
         /// <param name="pStr">The string to write.</param>
         public void Error(string pStr)
         {
-            Debug.WriteLine(string.Format("ERROR:{0}", pStr));
+			Debug.WriteLine(string.Format("ERROR:{0}", pStr));
         }
 
         /// <summary>

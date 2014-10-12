@@ -8,10 +8,14 @@
         /// <returns>The new object.</returns>
         public iOutputStream Create()
         {
-#if DEBUG
-            return new DebugStream();
+#if __MonoCS__
+			return new ConsoleStream();
 #else
-            return new ConsoleStream();
+			#if DEBUG
+			return new DebugStream();
+			#else
+			return new ConsoleStream();
+			#endif
 #endif
         }
     }

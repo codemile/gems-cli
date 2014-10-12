@@ -11,6 +11,8 @@
     <AssemblyName>GemsCLI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,19 +50,9 @@
     <Compile Include="Output\ConsoleStream.cs" />
     <Compile Include="Output\DebugStream.cs" />
     <Compile Include="Output\iOutputFactory.cs" />
-    <Compile Include="Properties\Help.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Help.resx</DependentUpon>
-    </Compile>
     <Compile Include="Help\HelpDictionary.cs" />
     <Compile Include="Help\iHelpProvider.cs" />
     <Compile Include="Output\OutputFormatter.cs" />
-    <Compile Include="Properties\Errors.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Errors.resx</DependentUpon>
-    </Compile>
     <Compile Include="Exceptions\GemsCLIException.cs" />
     <Compile Include="Exceptions\InvalidArgumentException.cs" />
     <Compile Include="Exceptions\SyntaxErrorException.cs" />
@@ -85,17 +77,12 @@
     <Compile Include="Types\ParamIP.cs" />
     <Compile Include="Types\ParamString.cs" />
     <Compile Include="Validators\Validator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Help.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Help.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Errors.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Compile Include="Properties\Errors.Designer.cs">
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Help.Designer.cs">
+      <DependentUpon>Help.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -105,4 +92,14 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Help.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Help.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
