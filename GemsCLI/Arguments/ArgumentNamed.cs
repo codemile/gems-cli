@@ -41,7 +41,8 @@ namespace GemsCLI.Arguments
         public override void Attach(IEnumerable<Description> pDescs)
         {
             Desc = pDescs.FirstOrDefault(pDesc=>pDesc.Role == eROLE.NAMED &&
-                    string.Compare(pDesc.Name, Name, StringComparison.CurrentCultureIgnoreCase) == 0);
+                                                string.Compare(pDesc.Name, Name,
+                                                    StringComparison.CurrentCultureIgnoreCase) == 0);
         }
     }
 }

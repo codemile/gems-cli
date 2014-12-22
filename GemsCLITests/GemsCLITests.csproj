@@ -53,6 +53,11 @@
     <Compile Include="Mock\MockHelp.cs" />
     <Compile Include="Mock\MockOutput.cs" />
     <Compile Include="Mock\MockOutputFactory.cs" />
+    <Compile Include="Properties\Errors.Designer.cs">
+      <DependentUpon>Errors.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Test\Output\ConsoleFactoryTests.cs" />
     <Compile Include="Test\Output\ConsoleStreamTests.cs" />
     <Compile Include="Test\Output\DebugStreamTests.cs" />
@@ -84,6 +89,10 @@
     <Compile Include="Test\Validators\ValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Help.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Help.Designer.cs</LastGenOutput>

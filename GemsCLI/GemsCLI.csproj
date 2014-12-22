@@ -84,9 +84,8 @@
     <Compile Include="Validators\Validator.cs" />
     <Compile Include="Properties\Errors.Designer.cs">
       <DependentUpon>Errors.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Help.Designer.cs">
-      <DependentUpon>Help.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -99,7 +98,7 @@
   -->
   <ItemGroup>
     <EmbeddedResource Include="Properties\Errors.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Errors.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Help.resx">
