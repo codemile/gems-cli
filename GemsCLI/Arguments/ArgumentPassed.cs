@@ -47,7 +47,7 @@ namespace GemsCLI.Arguments
             {
                 return;
             }
-            Desc = passed[Order];
+            Desc = Order == passed.Length ? passed[Order - 1] : passed[Order];
         }
     }
 }
